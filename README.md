@@ -30,6 +30,8 @@ compare(seqA: str, seqB: str)
 
 display(seqA: str, seqB: str, m: list)
 
+# --- more soon (wip) --- #
+
 ```
 
 # Documentation
