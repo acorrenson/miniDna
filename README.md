@@ -9,6 +9,15 @@ It provides some basic functions to compare, sort and study DNA sequences.
 
 ! MiniDna is'nt a professionnal tool, it is just an educationnal project !
 
+# Dependencies
+
+There is just ONE dependency for this module.
+Functions wich display matrices need a module named `tabulate` to work.
+
+You can install it with the following command:
+`pip install tabulate`
+
+
 # References
 
 All functions provided in the module are listed here :
