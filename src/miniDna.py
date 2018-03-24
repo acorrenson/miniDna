@@ -5,8 +5,9 @@ def isAdn(seq: str) -> bool:
 
   nuc = ['A', 'T', 'G', 'C']
 
-  for n in brin:
+  for n in seq:
     if n not in nuc:
+      print("Invalid DNA sequence")
       return False
   return True
 # -------------------------
@@ -31,33 +32,35 @@ def DotPlot(seqA: str, seqB: str, k: int):
 # keep only K long equals sequences  
 def FilterDotPlot(seqA: str, seqB: str, k:int):
 
-  la = len(seqA)
-  lb = len(seqB)
+  if isAdn(seqA) and isAdn(seqB):
+    la = len(seqA)
+    lb = len(seqB)
 
-  M = [[' ' for n in range(la)] for m in range(lb)]
+    M = [[' ' for n in range(la)] for m in range(lb)]
 
-  for i in range(lb + 1 - k):
-    for j in range(la + 1 - k):
-      a = seqA[j:j+k]
-      b = seqB[i:i+k]
+    for i in range(lb + 1 - k):
+      for j in range(la + 1 - k):
+        a = seqA[j:j+k]
+        b = seqB[i:i+k]
 
-      if a == b:
-        for d in range(k):
-          M[i+d][j+d] = 'x'
-
-  return M
+        if a == b:
+          for d in range(k):
+            M[i+d][j+d] = 'x'
+    return M
 # -------------------------
 
 # display dotplot properly
-def display(a, b, m):
+def display(a: str, b: str, m):
   for i in range(len(m)): m[i] = [b[i]] + m[i]
   print( tabulate(m, a, tablefmt = "simple") ) 
 # -------------------------
 
+# test
 a = 'ATGCC'
 b = 'ATGCC'
 
 m = FilterDotPlot(a, b, 2)
 
 display(a, b, m)
+# -------------------------
 
