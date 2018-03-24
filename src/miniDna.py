@@ -1,4 +1,10 @@
-from tabulate import tabulate
+# author: Arthur Correnson
+# email: jdrprod@gmail.com
+
+# (c) 2018
+
+# miniDna may be freely distributed under the MIT license.
+# (license file can be found in the parent directory)
 
 # test if a string is a DNA sequence
 def isAdn(seq: str) -> bool: 
