@@ -11,11 +11,7 @@ It provides some basic functions to compare, sort and study DNA sequences.
 
 # Dependencies
 
-There is just ONE dependency for this module.
-Functions wich display matrices need a module named `tabulate` to work.
-
-You can install it with the following command:
-`pip install tabulate`
+Python : `v3.~` 
 
 
 # References
@@ -24,17 +20,13 @@ All functions provided in the module are listed here :
 
 ```Python
 
-# check if a given string is a DNA sequence
 isDna(seq: str) # -> bool
 
-# compare two sequences using DotPlot method
-# return a matrice of dots showing similarities
-DotPlot(seqA: str, seqB: str) # -> list
+dotPlot(seqA: str, seqB: str) # -> list
 
-# compare two squences using DotPlot method
-# return a matrice of dots showing only similar portions
-# of the sequences longer or equal to K
-FilterDotPlot(seqA: str, seqB: str, k: int) # -> list
+filterDotPlot(seqA: str, seqB: str, k: int) # -> list
+
+compare(seqA: str, seqB: str)
 
 display(seqA: str, seqB: str, m: list)
 
@@ -44,7 +36,7 @@ display(seqA: str, seqB: str, m: list)
 
 ### isDna(seq)
 
-Check if the given string is a Dna sequences (containing only nucleotides A T G C)
+Check if the given string is a Dna sequence (containing only nucleotides A T G C)
 
 Parameters : 
 + seq : `str` String to check
@@ -52,28 +44,57 @@ Parameters :
 Output :
 + bool
 
-### DotPlot(seqA, seqB)
+### dotPlot(seqA, seqB)
 
 Compare two sequences using DotPlot method.
-return a matrice of dots showing similarities.
+Return a matrice showing similarities between sequence A and B. 
+A similarity is marked with a X character in the matrice. 
+A difference is marked with a space character in the matrice. 
 
 Parameters :
 + seqA : `str` first Dna sequence to compare
 + seqB : `str` second Dna sequence to compare
 
 Output :
-+ list : a matrice of dots showing similarities betwen both sequences
++ `list` / `str` : matrice
 
-### FilterDotPlot(seqA, seqB, k)
+### filterDotPlot(seqA, seqB, k)
 
 Compare two squences using DotPlot method.
-return a matrice of dots showing only similar portions
+Return a matrice of dots showing only similar portions
 of the sequences longer or equal to K.
 
 Parameters :
 + seqA : `str` first Dna sequence to compare
 + seqB : `str` second Dna sequence to compare
 + k : `int` size of the compared portions
+
+### compare(seqA, seqB)
+
+Verry simple comparison of 2 DNA sequences. 
+Equal nucleotides are marked with a vertical bar. 
+Different nucleotides are marked with a horinzontal bar. 
+
+Display the result in the console.
+
+Parameters :
++ seqA : `str` first Dna sequence to compare
++ seqB : `str` second Dna sequence to compare
+
+Output :
++ `null`
+
+### display(seqA, seqB, m)
+
+Display a matrice generated with *dotPlot* or *filterDotPlot* functions in the console.
+
++ seqA : `str` sequence (row)
++ seqB : `str` sequence (column)
++ m : `list` / `str` matrice
+
+Output :
++ `null`
+
 
 
 
