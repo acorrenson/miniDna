@@ -1,4 +1,10 @@
-from tabulate import tabulate
+# author: Arthur Correnson
+# email: jdrprod@gmail.com
+
+# (c) 2018
+
+# miniDna may be freely distributed under the MIT license.
+# (license file can be found in the parent directory)
 
 # test if a string is a DNA sequence
 def isAdn(seq: str) -> bool: 
@@ -13,7 +19,7 @@ def isAdn(seq: str) -> bool:
 # -------------------------
 
 # simple comparison of 2 DNA sequences using DotPlot
-def DotPlot(seqA: str, seqB: str, k: int):
+def dotPlot(seqA: str, seqB: str, k: int):
 
   la = len(seqA)
   lb = len(seqB)
@@ -30,7 +36,7 @@ def DotPlot(seqA: str, seqB: str, k: int):
 
 # comparison of DNA sequences using DotPlot 
 # keep only K long equals sequences  
-def FilterDotPlot(seqA: str, seqB: str, k:int):
+def filterDotPlot(seqA: str, seqB: str, k:int):
 
   if isAdn(seqA) and isAdn(seqB):
     la = len(seqA)
@@ -46,21 +52,64 @@ def FilterDotPlot(seqA: str, seqB: str, k:int):
         if a == b:
           for d in range(k):
             M[i+d][j+d] = 'x'
+
     return M
 # -------------------------
 
+def compare(seqA: str, seqB: str):
+
+  if isAdn(seqA) and isAdn(seqB):
+    la = len(seqA)
+    lb = len(seqB)
+    
+    sim = ''
+
+    for n in range(la):
+      if seqA[n] == seqB[n]:
+        sim += '|'
+      else:
+        sim += '-'
+
+    print('======|=' + '=' * len(seqA))
+    print(' seqA | ' + seqA)
+    print(' ---- | ' + sim)
+    print(' seqB | ' + seqB)
+    print('======|=' + '=' * len(seqA))
+
+
 # display dotplot properly
-def display(a: str, b: str, m):
-  for i in range(len(m)): m[i] = [b[i]] + m[i]
-  print( tabulate(m, a, tablefmt = "simple") ) 
+def display(a, b, m):
+
+  header = '  '
+
+  for c in a:
+    header += (c + ' ')
+
+  print(header)
+  print('==' * len(a) + '===')
+
+  for i in range(len(m)):
+    s = b[i] + ' '
+    for j in range(len(m[0])):
+      s += (m[i][j] + ' ')
+
+    print(s)
 # -------------------------
 
+
 # test
-a = 'ATGCC'
-b = 'ATGCC'
+a = 'ATGCCGCTAACGTA'
+b = 'ATGCCACTACCGTA'
 
-m = FilterDotPlot(a, b, 2)
+m = filterDotPlot(a, b, 3)
 
+# display(a, b, m)
+print('DotPlot\n')
 display(a, b, m)
+
+print('\n')
+
+print('Simple comparison\n')
+compare(a, b)
 # -------------------------
 
