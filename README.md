@@ -46,7 +46,7 @@ display(seqA: str, seqB: str, m: list)
 
 Check if the given string is a Dna sequences (containing only nucleotides A T G C)
 
-Parameters : 
+Parameters :
 + seq : `str` String to check
 
 Output :
