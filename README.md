@@ -17,7 +17,7 @@ I would like to quote 2 main sources that I used to do this project :
 + course written by : Jacques van Helden
 + University of Aix-Marseille, France
 
-["Bioinformatique 2eme édition"](https://www.dunod.com/sciences-techniques/bioinformatique-cours-et-applications)
+[*Bioinformatique 2eme édition*](https://www.dunod.com/sciences-techniques/bioinformatique-cours-et-applications)
 + book written by : Gilbert Deléage & Manolo Gouy
 + edition : Dunod
 
