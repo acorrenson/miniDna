@@ -9,6 +9,8 @@ It provides some basic functions to compare, sort and study DNA sequences.
 
 ! MiniDna is'nt a professionnal tool, it is just an educationnal project !
 
+# Thanks
+
 # Dependencies
 
 Python : `v3.~` 

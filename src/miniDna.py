@@ -8,6 +8,8 @@
 
 import math, random
 
+NUCLEOTIDES = 'ATGC'
+
 # test if a string is a DNA sequence
 def isAdn(seq: str) -> bool: 
 
@@ -20,7 +22,7 @@ def isAdn(seq: str) -> bool:
   return True
 
 # percentage of identity
-def percentIdentical(seqA: str, seqB: str):
+def percentIdentical(seqA: str, seqB: str) -> float:
   if len(seqA) != len(seqB):
     raise ValueError("sequences have unequal length")
 
@@ -28,8 +30,12 @@ def percentIdentical(seqA: str, seqB: str):
   
   return math.ceil(100 * (1 - dist/len(seqA)))
 
+# probability of identity after n generations
+def identityProbability(gs, mr = 1e-08):
+  return math.pow(1-mr, gs)
+
 # simple comparison of 2 DNA sequences using DotPlot
-def dotPlot(seqA: str, seqB: str, k: int):
+def dotPlot(seqA, seqB, k):
 
   la = len(seqA)
   lb = len(seqB)
@@ -45,7 +51,7 @@ def dotPlot(seqA: str, seqB: str, k: int):
 
 # comparison of DNA sequences using DotPlot 
 # keep only K long equals sequences  
-def filterDotPlot(seqA: str, seqB: str, k:int):
+def filterDotPlot(seqA, seqB, k):
 
   if isAdn(seqA) and isAdn(seqB):
     la = len(seqA)
@@ -64,7 +70,7 @@ def filterDotPlot(seqA: str, seqB: str, k:int):
 
     return M
 
-def compare(seqA: str, seqB: str):
+def compare(seqA, seqB):
 
   if isAdn(seqA) and isAdn(seqB):
     la = len(seqA)
@@ -100,15 +106,13 @@ def display(a, b, m):
     s = b[i] + ' '
     for j in range(len(m[0])):
       s += (m[i][j] + ' ')
-
     print(s)
 
-
 # test
-a = 'ATGCCGCTAACGTA'
-b = 'ATGCCACTACCGTA'
+a = 'AGCTCCTAAGCCACTGCCTGCTGGTGACCCTGGCCGCCCACCTCCCCGCCGAGTTCACCC'
+b = 'AGCTCCTGAGCCACTGCCTGCTGGTGACCTTGGCTAGCCACCACCCTGCCGATTTCACCC'
 
-m = filterDotPlot(a, b, 2)
+m = filterDotPlot(a, b, 5)
 
 # display(a, b, m)
 print('DotPlot\n')
@@ -124,3 +128,7 @@ print('\n')
 print("percentIdentical :\n")
 print(percentIdentical(a, b), "%")
 
+print('\n')
+
+print("percentIdentical after evolution :\n")
+print(simulateEvolution(a, b, 16000000))
