@@ -4,14 +4,10 @@ An introduction to bioinformatics !
 
 # Purposes
 
-MiniDna is a python module I coded in order to discover the incredible world of bioinformatics.
+MiniDna is a python project I coded in order to discover the incredible world of bioinformatics.
 It provides some basic functions to compare, sort and study DNA sequences.
 
-MiniDna is'nt a professionnal tool, it is just an educationnal project !
-
-# Thanks
-
-I would like to quote 2 main sources that I used to do this project : 
+# Acknowledgments
 
 [*Alignements par pair*](http://pedagogix-tagc.univ-mrs.fr/courses/bioinfo_intro/pdf_files/03.02.alignements_par_paires_fr.pdf)
 + course written by : Jacques van Helden
@@ -21,11 +17,11 @@ I would like to quote 2 main sources that I used to do this project :
 + book written by : Gilbert Deléage & Manolo Gouy
 + edition : Dunod
 
-# Thanks
+[*Computaional Biology*](https://brilliant.org/courses/computational-biology/) 
 
 # Dependencies
 
-Python : `v3.~` 
+Python : `v3.~`
 
 # References
 
@@ -46,6 +42,11 @@ compare(seqA: str, seqB: str)
 
 display(seqA: str, seqB: str, m: list)
 # return -> null
+
+percentIdentical(seqA: str, seqB: str)
+# return -> int
+
+identityProbability(gs: int, mr: float)
 
 # --- more soon (wip) --- #
 
@@ -75,7 +76,7 @@ Parameters :
 + seqB : `str` second Dna sequence to compare
 
 Output :
-+ `list` / `str` : matrice
++ `list` : matrice
 
 ### filterDotPlot(seqA, seqB, k)
 
@@ -114,7 +115,23 @@ Display a matrix generated with *dotPlot* or *filterDotPlot* functions in the co
 Output :
 + `null`
 
+### percentIdentical(seqA, seqB)
 
+Return the percentage of identity between two DNA sequences.
+The sequences should have the same length !
 
++ seqA : `str` sequence
++ seqB : `str` sequence
 
+Output : 
++ `int` : percentage
 
+### identityProbability(gs [, mr])
+
+Return the probabilty for a sequence to not change over n generations of evolution.
+
++ gs : `int` number of generations
++ mr : `float` mutation rate (1E-8 by default)
+
+Output :
++ `float` : probability
