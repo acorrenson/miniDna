@@ -8,7 +8,34 @@
 
 import math, random
 
+# all nucleotides
 NUCLEOTIDES = 'ATGC'
+
+# codon to amino acid table
+AMINO =  {
+  'ATG': 'M', 'GCG': 'A', 'TCA': 'S',
+  'GAA': 'E', 'GGG': 'G', 'GGT': 'G',
+  'AAA': 'K', 'GAG': 'E', 'AAT': 'N',
+  'CTA': 'L', 'CAT': 'H', 'TCG': 'S',
+  'TAG': 'STOP', 'GTG': 'V', 'TAT': 'Y',
+  'CCT': 'P', 'ACT': 'T', 'TCC': 's',
+  'CAG': 'Q', 'CCA': 'P', 'TAA': 'STOP',
+  'AGA': 'R', 'ACG': 'T', 'CAA': 'Q',
+  'TGT': 'C', 'GCT': 'A', 'TTC': 'F',
+  'AGT': 'S', 'ATA': 'I', 'TTA': 'L',
+  'CCG': 'P', 'ATC': 'I', 'TTT': 'F',
+  'CGT': 'R', 'TGA': 'STOP', 'GTA': 'V',
+  'TCT': 'S', 'CAC': 'H', 'GTT': 'V',
+  'GAT': 'D', 'CGA': 'R', 'GGA': 'G',
+  'GTC': 'V', 'GGC': 'G', 'TGC': 'C',
+  'CTG': 'L', 'CTC': 'L', 'CGC': 'R',
+  'CGG': 'R', 'AAC': 'N', 'GCC': 'A',
+  'ATT': 'I', 'AGG': 'R', 'GAC': 'D',
+  'ACC': 'T', 'AGC': 'S', 'TAC': 'Y',
+  'ACA': 'T', 'AAG': 'K', 'GCA': 'A',
+  'TTG': 'L', 'CCC': 'P', 'CTT': 'L', 
+  'TGG': 'W'
+} 
 
 # test if a string is a DNA sequence
 def isAdn(seq: str) -> bool: 
@@ -34,8 +61,20 @@ def percentIdentical(seqA: str, seqB: str) -> float:
 def identityProbability(gs, mr = 1e-08):
   return math.pow(1-mr, gs)
 
+def translate(seq):
+
+  start = 0
+  protein = ''
+
+  while start+2 < len(seq):
+    codon = seq[start:start+3]
+    protein += AMINO[codon]
+    start += 3
+
+  return protein
+
 # simple comparison of 2 DNA sequences using DotPlot
-def dotPlot(seqA, seqB, k):
+def dotPlot(seqA, seqB):
 
   la = len(seqA)
   lb = len(seqB)
@@ -72,23 +111,29 @@ def filterDotPlot(seqA, seqB, k):
 
 def compare(seqA, seqB):
 
-  if isAdn(seqA) and isAdn(seqB):
-    la = len(seqA)
-    lb = len(seqB)
-    
-    sim = ''
+  la = len(seqA)
+  lb = len(seqB)
+  
+  sim = ''
+  match = 0
+  diff = 0
 
-    for n in range(la):
-      if seqA[n] == seqB[n]:
-        sim += '|'
-      else:
-        sim += '-'
+  for n in range(la):
+    if seqA[n] == seqB[n]:
+      sim += '|'
+      match += 1
+    else:
+      sim += '-'
+      diff += 1
 
-    print('======|=' + '=' * len(seqA))
-    print(' seqA | ' + seqA)
-    print(' ---- | ' + sim)
-    print(' seqB | ' + seqB)
-    print('======|=' + '=' * len(seqA))
+  print('======|=' + '=' * len(seqA))
+  print(' seqA | ' + seqA)
+  print(' ---- | ' + sim)
+  print(' seqB | ' + seqB)
+  print('======|=' + '=' * len(seqA))
+  print('======|> ' + str(diff) + ' differences')
+  print('======|> ' + str(match) + ' matches')
+  print('======|> ' + str(percentIdentical(seqA, seqB)) + '% identity')
 
 
 # display dotplot properly
@@ -114,21 +159,20 @@ b = 'AGCTCCTGAGCCACTGCCTGCTGGTGACCTTGGCTAGCCACCACCCTGCCGATTTCACCC'
 
 m = filterDotPlot(a, b, 5)
 
-# display(a, b, m)
 print('DotPlot\n')
 display(a, b, m)
 
 print('\n')
 
-print('Simple comparison\n')
-compare(a, b)
-
-print('\n')
-
-print("percentIdentical :\n")
+print("percentIdentical :")
 print(percentIdentical(a, b), "%")
 
 print('\n')
 
-print("percentIdentical after evolution :\n")
-print(simulateEvolution(a, b, 16000000))
+print('DNA comparison :\n')
+compare('TCTGCTTTAACTTAT', 'AGTGCGCTGACCTAC')
+
+print('\n')
+
+print("PROTEIN comparison :\n")
+compare(translate('TCTGCTTTAACTTAT'), translate('AGTGCGCTGACCTAC'))
