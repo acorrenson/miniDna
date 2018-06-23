@@ -6,6 +6,8 @@
 # miniDna may be freely distributed under the MIT license.
 # (license file can be found in the parent directory)
 
+import math, random
+
 # test if a string is a DNA sequence
 def isAdn(seq: str) -> bool: 
 
@@ -16,7 +18,15 @@ def isAdn(seq: str) -> bool:
       print("Invalid DNA sequence")
       return False
   return True
-# -------------------------
+
+# percentage of identity
+def percentIdentical(seqA: str, seqB: str):
+  if len(seqA) != len(seqB):
+    raise ValueError("sequences have unequal length")
+
+  dist = sum(ch1 != ch2 for ch1, ch2 in zip(seqA, seqB))
+  
+  return math.ceil(100 * (1 - dist/len(seqA)))
 
 # simple comparison of 2 DNA sequences using DotPlot
 def dotPlot(seqA: str, seqB: str, k: int):
@@ -32,7 +42,6 @@ def dotPlot(seqA: str, seqB: str, k: int):
         M[i][j] = 'x'
 
   return M
-# -------------------------
 
 # comparison of DNA sequences using DotPlot 
 # keep only K long equals sequences  
@@ -54,7 +63,6 @@ def filterDotPlot(seqA: str, seqB: str, k:int):
             M[i+d][j+d] = 'x'
 
     return M
-# -------------------------
 
 def compare(seqA: str, seqB: str):
 
@@ -94,14 +102,13 @@ def display(a, b, m):
       s += (m[i][j] + ' ')
 
     print(s)
-# -------------------------
 
 
 # test
 a = 'ATGCCGCTAACGTA'
 b = 'ATGCCACTACCGTA'
 
-m = filterDotPlot(a, b, 3)
+m = filterDotPlot(a, b, 2)
 
 # display(a, b, m)
 print('DotPlot\n')
@@ -111,5 +118,9 @@ print('\n')
 
 print('Simple comparison\n')
 compare(a, b)
-# -------------------------
+
+print('\n')
+
+print("percentIdentical :\n")
+print(percentIdentical(a, b), "%")
 
