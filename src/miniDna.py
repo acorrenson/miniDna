@@ -1,10 +1,18 @@
-# author: Arthur Correnson
-# email: jdrprod@gmail.com
 
-# (c) 2018
+"""MiniDna : an introduction to Bioinformatics
+  
+  MiniDna is a python project to discover the incredible
+  world of Bioinformatics. This module provides some
+  basic functions to compare, translate and study DNA sequences
 
-# miniDna may be freely distributed under the MIT license.
-# (license file can be found in the parent directory)
+  Author: Arthur Correnson
+  Email: arthur.correnson@gmail.com
+
+  (c) 2018
+
+  MiniDna may be freely distributed under the MIT license.
+  (license file can be found in the parent directory)
+"""
 
 import math, random
 
@@ -37,83 +45,110 @@ AMINO =  {
   'TGG': 'W'
 } 
 
-# test if a string is a DNA sequence
 def isAdn(seq: str) -> bool: 
+  """Test if a string is a DNA sequence.
 
+    Keyword arguments:
+    seq -- the string to test
+  """
   nuc = ['A', 'T', 'G', 'C']
-
   for n in seq:
     if n not in nuc:
       print("Invalid DNA sequence")
       return False
   return True
 
-# percentage of identity
+
 def percentIdentical(seqA: str, seqB: str) -> float:
+  """ Return the percentage of identity between two DNA sequences.
+    
+    Keyword arguments:
+    seqA -- the first sequence
+    seqB -- the second sequence
+  """
   if len(seqA) != len(seqB):
     raise ValueError("sequences have unequal length")
-
   dist = sum(ch1 != ch2 for ch1, ch2 in zip(seqA, seqB))
-  
   return math.ceil(100 * (1 - dist/len(seqA)))
 
-# probability of identity after n generations
-def identityProbability(gs, mr = 1e-08):
+
+
+def identityProbability(gs: int, mr: float = 1e-08) -> float:
+  """Return the probabilty for a sequence 
+    to not change over n generations of evolution.
+    
+    Keyword arguments:
+    gs -- number of generations
+    mr -- mutation rate (default is 1e-08)
+  """
   return math.pow(1-mr, gs)
 
-def translate(seq):
 
+def translate(seq: str) -> str:
+  """find the protein coded in a DNA sequence
+    
+    Keyword arguments:
+    seq -- DNA sequence to translate
+  """
   start = 0
   protein = ''
-
   while start+2 < len(seq):
     codon = seq[start:start+3]
     protein += AMINO[codon]
     start += 3
-
   return protein
 
-# simple comparison of 2 DNA sequences using DotPlot
-def dotPlot(seqA, seqB):
 
+def dotPlot(seqA: str, seqB: str) -> list:
+  """Compare two DNA sequences using DotPlot method.
+
+    Keyword arguments:
+    seqA -- first sequence
+    seqB -- second sequence
+  """
   la = len(seqA)
   lb = len(seqB)
-
   M = [[' ' for n in range(la)] for m in range(lb)]
-
   for i in range(lb):
     for j in range(la):
       if seqB[i] == seqA[j]:
         M[i][j] = 'x'
-
   return M
 
-# comparison of DNA sequences using DotPlot 
-# keep only K long equals sequences  
-def filterDotPlot(seqA, seqB, k):
 
+def filterDotPlot(seqA: str, seqB: str, k: int) -> list:
+  """Compare two DNA sequences using DotPlot method 
+    keep only K long equals sequences
+
+    Keyword arguments:
+    seqA -- first sequence
+    seqB -- second sequence
+    k -- minimum length of equal portions
+  """
   if isAdn(seqA) and isAdn(seqB):
     la = len(seqA)
     lb = len(seqB)
-
     M = [[' ' for n in range(la)] for m in range(lb)]
-
     for i in range(lb + 1 - k):
       for j in range(la + 1 - k):
         a = seqA[j:j+k]
         b = seqB[i:i+k]
-
         if a == b:
           for d in range(k):
             M[i+d][j+d] = 'x'
-
     return M
 
-def compare(seqA, seqB):
 
+def compare(seqA: str, seqB: str) -> None:
+  """Compare two sequences.
+    Display the result in the console
+
+    Keyword arguments:
+    seqA -- first sequence (DNA or Protein)
+    seqB -- first sequence (DNA or Protein)
+  """
   la = len(seqA)
   lb = len(seqB)
-  
   sim = ''
   match = 0
   diff = 0
@@ -136,9 +171,14 @@ def compare(seqA, seqB):
   print('======|> ' + str(percentIdentical(seqA, seqB)) + '% identity')
 
 
-# display dotplot properly
-def display(a, b, m):
-
+def display(a: str, b: str, m: list) -> None:
+  """Display dotplot matrix properly
+    
+    Keyword arguments:
+    a -- first sequence compared
+    b -- second sequence compared
+    m -- dotplot matrix
+  """
   header = '  '
 
   for c in a:
@@ -152,6 +192,7 @@ def display(a, b, m):
     for j in range(len(m[0])):
       s += (m[i][j] + ' ')
     print(s)
+
 
 # test
 a = 'AGCTCCTAAGCCACTGCCTGCTGGTGACCCTGGCCGCCCACCTCCCCGCCGAGTTCACCC'
