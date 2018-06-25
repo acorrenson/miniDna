@@ -20,7 +20,7 @@ import math, random
 NUCLEOTIDES = 'ATGC'
 
 # codon to amino acid table
-AMINO =  {
+AMINOCODE =  {
   'ATG': 'M', 'GCG': 'A', 'TCA': 'S',
   'GAA': 'E', 'GGG': 'G', 'GGT': 'G',
   'AAA': 'K', 'GAG': 'E', 'AAT': 'N',
@@ -43,7 +43,26 @@ AMINO =  {
   'ACA': 'T', 'AAG': 'K', 'GCA': 'A',
   'TTG': 'L', 'CCC': 'P', 'CTT': 'L', 
   'TGG': 'W'
-} 
+}
+
+AMINO = {
+  'A': 'Alanine', 
+  'F': 'Phenyl-alanine', 
+  'L': 'Leucine',
+  'P': 'Proline',
+  'H': 'Histidine',
+  'Q': 'Glutamine',
+  'R': 'Arginine',
+  'I': 'Isoleucine',
+  'T': 'Threonine', 
+  'N': 'Asparagine',
+  'K': 'Lysine',
+  'S': 'Serine',
+  'V': 'Valine',
+  'D': 'Aspartic acid',
+  'E': 'Glutamic acid',
+  'G': 'Glycine'
+}
 
 def isAdn(seq: str) -> bool: 
   """Test if a string is a DNA sequence.
@@ -84,6 +103,44 @@ def identityProbability(gs: int, mr: float = 1e-08) -> float:
   return math.pow(1-mr, gs)
 
 
+def freqList(seqList: list, prob: bool = True) -> dict:
+  """Return the frequency of each nucleotide in each
+    position.
+
+    Keyword argument:
+    seqList -- DNA sequences list
+    prob -- False: return a dictionnary of probability (between 0 and 1)
+            True: return a dictionnary of freqency (int)
+            Default is True
+  """
+  n = len(seqList[0])
+  nl = len(seqList)
+  freqs = {
+    'A': [0]*n,
+    'T': [0]*n,
+    'G': [0]*n,
+    'C': [0]*n
+  }
+  for seq in seqList:
+    for i, nuc in enumerate(seq):
+        freqs[nuc][i] += 1
+  if prob:
+    for key in freqs:
+      for i in range(len(freqs[key])):
+        freqs[key][i] = freqs[key][i]/nl
+  return freqs
+
+def freqAt(freqDict: dict, nuc: str, n: int) -> float:
+  """Read a frequency dictionnary returned 
+    by the function freqList.
+
+    Keyword arguments:
+    freqDic -- frequence dictionnary
+    nuc -- nucleotide A,T,G or C
+    n -- position
+  """
+  return freqDict[nuc][n]
+
 def translate(seq: str) -> str:
   """find the protein coded in a DNA sequence
     
@@ -94,7 +151,7 @@ def translate(seq: str) -> str:
   protein = ''
   while start+2 < len(seq):
     codon = seq[start:start+3]
-    protein += AMINO[codon]
+    protein += AMINOCODE[codon]
     start += 3
   return protein
 
@@ -217,3 +274,8 @@ print('\n')
 
 print("PROTEIN comparison :\n")
 compare(translate('TCTGCTTTAACTTAT'), translate('AGTGCGCTGACCTAC'))
+
+print('\n')
+
+print("frequency :\n")
+print(freqList([a, b])['A'])
