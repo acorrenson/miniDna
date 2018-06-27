@@ -29,24 +29,22 @@ All functions provided in the module are listed here :
 
 ```Python
 
-isDna(seq: str) 
-# return -> bool
+isDna(seq: str) -> bool
 
-dotPlot(seqA: str, seqB: str) # -> list
+dotPlot(seqA: str, seqB: str) -> list
 
-filterDotPlot(seqA: str, seqB: str, k: int)
-# return -> list
+filterDotPlot(seqA: str, seqB: str, k: int) -> list
 
-compare(seqA: str, seqB: str)
-# return -> null
+compare(seqA: str, seqB: str) -> null
 
-display(seqA: str, seqB: str, m: list)
-# return -> null
+display(seqA: str, seqB: str, m: list) -> null
 
-percentIdentical(seqA: str, seqB: str)
-# return -> int
+# new !!!
+percentIdentical(seqA: str, seqB: str) -> int
 
 identityProbability(gs: int, mr: float)
+
+freqList(seqList: list, prob: bool = True) -> dict
 
 # --- more soon (wip) --- #
 
