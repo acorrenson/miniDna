@@ -138,8 +138,8 @@ def _subs(a: str, b: str, ide: int = 3, sub: int = -1) -> int:
   return (a == b) * ide + (a != b) * sub
 
 
-def localAlign(seqA: str, seqB: str, ide: int = 3, sub: int = -1, ind: int = -3) -> tuple:
-  """Find the best local alignement between two sequences.
+def globalAlign(seqA: str, seqB: str, ide: int = 3, sub: int = -1, ind: int = -3) -> tuple:
+  """Find the best global alignement between two sequences.
     Return the two aligned sequences as a tuple.
 
     Keyword arguments:
