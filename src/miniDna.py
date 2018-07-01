@@ -79,7 +79,7 @@ def isAdn(seq: str) -> bool:
 
 
 def percentIdentical(seqA: str, seqB: str) -> float:
-  """ Return the percentage of identity between two DNA sequences.
+  """Return the percentage of identity between two DNA sequences.
     
     Keyword arguments:
     seqA -- the first sequence
@@ -90,6 +90,49 @@ def percentIdentical(seqA: str, seqB: str) -> float:
   dist = sum(ch1 != ch2 for ch1, ch2 in zip(seqA, seqB))
   return math.ceil(100 * (1 - dist/len(seqA)))
 
+
+def countIdentical(seqA: str, seqB: str) -> int:
+  """Return the number of equal nucleotides between two sequences.
+
+    Keyword arguments:
+    seqA -- the first sequence
+    seqB -- the second sequence
+  """
+  if len(seqA) != len(seqB):
+    raise ValueError("sequences have unequal length")
+  count = sum(ch1 == ch2 for ch1, ch2 in zip(seqA, seqB))
+  return count
+
+
+def simpleAlign(seqA: str, seqB: str) -> tuple:
+  """Find the best way to superimpose two sequences
+    without changing them.
+    Empty nucleotides used to match as best as possible
+    the sequences are symbolized with a "-" character.
+    
+    Keyword arguments:
+    seqA -- the first sequence
+    seqB -- the second sequence
+  """
+  bestShift = 0
+  shift = 0
+  countId = countIdentical(seqA, seqB)
+
+  while(shift < len(seqA)):
+    shift += 1
+    a = seqA[shift:len(seqA)]
+    b = seqB[0:len(seqB) - shift]
+    c = countIdentical(a, b)
+    if c > countId:
+      countId = c
+      bestShift = shift
+
+  
+  finalA = seqA + "".join("-" for j in range(bestShift))
+  finalB = "".join("-" for i in range(bestShift)) + seqB
+
+  return (finalA, finalB)
+  
 
 
 def identityProbability(gs: int, mr: float = 1e-08) -> float:
@@ -130,6 +173,7 @@ def freqList(seqList: list, prob: bool = True) -> dict:
         freqs[key][i] = freqs[key][i]/nl
   return freqs
 
+
 def freqAt(freqDict: dict, nuc: str, n: int) -> float:
   """Read a frequency dictionnary returned 
     by the function freqList.
@@ -140,6 +184,7 @@ def freqAt(freqDict: dict, nuc: str, n: int) -> float:
     n -- position
   """
   return freqDict[nuc][n]
+
 
 def translate(seq: str) -> str:
   """find the protein coded in a DNA sequence
@@ -215,7 +260,7 @@ def compare(seqA: str, seqB: str) -> None:
       sim += '|'
       match += 1
     else:
-      sim += '-'
+      sim += ' '
       diff += 1
 
   print('======|=' + '=' * len(seqA))
@@ -279,3 +324,12 @@ print('\n')
 
 print("frequency :\n")
 print(freqList([a, b])['A'])
+
+print('\n')
+
+seqa = "AATCATGC"
+seqb = "TTTGCATT"
+
+seqb, seqa = simpleAlign(seqb, seqa)
+
+compare(seqb, seqa)
