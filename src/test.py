@@ -43,5 +43,5 @@ print("\n")
 
 compare("AGACTAGTTAC", "CGAGACGT---")
 
-a, b = localAlign("AGACTAGTTAC", "CGAGACGT")
+a, b = globalAlign("AGACTAGTTAC", "CGAGACGT")
 compare(a, b)
