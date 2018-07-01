@@ -104,8 +104,8 @@ def countIdentical(seqA: str, seqB: str) -> int:
   return count
 
 
-def simpleAlign(seqA: str, seqB: str) -> str:
-  """Find the best way to superimpose two sequences.
+def simpleAlign(seqA: str, seqB: str) -> tuple:
+  """Find the best way to superimpose two sequences
     without changing them.
     Empty nucleotides used to match as best as possible
     the sequences are symbolized with a "*" character.
@@ -127,9 +127,11 @@ def simpleAlign(seqA: str, seqB: str) -> str:
       countId = c
       bestShift = shift
 
-  finalB = "".join("*" for i in range(bestShift)) 
-  finalB += seqB[0:len(seqB) - bestShift]
-  return finalB
+  
+  finalA = seqA + "".join("*" for j in range(bestShift))
+  finalB = "".join("*" for i in range(bestShift)) + seqB
+
+  return (finalA, finalB)
   
 
 
@@ -171,6 +173,7 @@ def freqList(seqList: list, prob: bool = True) -> dict:
         freqs[key][i] = freqs[key][i]/nl
   return freqs
 
+
 def freqAt(freqDict: dict, nuc: str, n: int) -> float:
   """Read a frequency dictionnary returned 
     by the function freqList.
@@ -181,6 +184,7 @@ def freqAt(freqDict: dict, nuc: str, n: int) -> float:
     n -- position
   """
   return freqDict[nuc][n]
+
 
 def translate(seq: str) -> str:
   """find the protein coded in a DNA sequence
@@ -326,5 +330,6 @@ print('\n')
 seqa = "AATCATGC"
 seqb = "TTTGCATT"
 
-compare(seqb, simpleAlign(seqb, seqa))
-compare(seqa, simpleAlign(seqa, seqb))
+seqb, seqa = simpleAlign(seqb, seqa)
+
+compare(seqb, seqa)
