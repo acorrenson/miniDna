@@ -79,7 +79,7 @@ def isAdn(seq: str) -> bool:
 
 
 def percentIdentical(seqA: str, seqB: str) -> float:
-  """ Return the percentage of identity between two DNA sequences.
+  """Return the percentage of identity between two DNA sequences.
     
     Keyword arguments:
     seqA -- the first sequence
@@ -90,6 +90,47 @@ def percentIdentical(seqA: str, seqB: str) -> float:
   dist = sum(ch1 != ch2 for ch1, ch2 in zip(seqA, seqB))
   return math.ceil(100 * (1 - dist/len(seqA)))
 
+
+def countIdentical(seqA: str, seqB: str) -> int:
+  """Return the number of equal nucleotides between two sequences.
+
+    Keyword arguments:
+    seqA -- the first sequence
+    seqB -- the second sequence
+  """
+  if len(seqA) != len(seqB):
+    raise ValueError("sequences have unequal length")
+  count = sum(ch1 == ch2 for ch1, ch2 in zip(seqA, seqB))
+  return count
+
+
+def autoMatch(seqA: str, seqB: str) -> str:
+  """Find the best alignment between two sequences.
+    Return a new version of the second sequence.
+    Empty nucleotides used to match as best as possible
+    the sequences are symbolized with a "*" character.
+    
+    Keyword arguments:
+    seqA -- the first sequence
+    seqB -- the second sequence
+  """
+  bestShift = 0
+  shift = 0
+  countId = countIdentical(seqA, seqB)
+
+  while(shift < len(seqA)):
+    shift += 1
+    a = seqA[shift:len(seqA)]
+    b = seqB[0:len(seqB) - shift]
+    c = countIdentical(a, b)
+    if c > countId:
+      countId = c
+      bestShift = shift
+
+  finalB = "".join("*" for i in range(bestShift)) 
+  finalB += seqB[0:len(seqB) - bestShift]
+  return finalB
+  
 
 
 def identityProbability(gs: int, mr: float = 1e-08) -> float:
@@ -279,3 +320,11 @@ print('\n')
 
 print("frequency :\n")
 print(freqList([a, b])['A'])
+
+print('\n')
+
+seqa = "AATCATGC"
+seqb = "TTTGCATT"
+
+compare(seqb, autoMatch(seqb, seqa))
+compare(seqa, autoMatch(seqa, seqb))
