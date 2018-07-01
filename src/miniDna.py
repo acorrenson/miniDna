@@ -134,6 +134,62 @@ def simpleAlign(seqA: str, seqB: str) -> tuple:
   return (finalA, finalB)
   
 
+def _subs(a: str, b: str, ide: int = 3, sub: int = -1) -> int:
+  return (a == b) * ide + (a != b) * sub
+
+
+def localAlign(seqA: str, seqB: str, ide: int = 3, sub: int = -1, ind: int = -3) -> tuple:
+  """Find the best local alignement between two sequences.
+    Return the two aligned sequences as a tuple.
+
+    Keyword arguments:
+    seqA -- first sequence
+    seqB -- second sequence
+    ide -- identity score 
+    sub -- substitution score
+    ind -- indel score
+  """
+  F = [[0 for x in range(len(seqA))] for y in range(len(seqB))]
+  
+  for i in range(len(seqA)):
+    F[0][i] = ind * i
+  for i in range(len(seqB)):
+    F[i][0] = ind * i
+
+  for i in range(1, len(seqB)):
+    for j in range(1, len(seqA)):
+      s1 = F[i-1][j-1] + _subs(seqA[j], seqB[i], ide, sub)
+      s2 = F[i-1][j] + ind
+      s3 = F[i][j-1] + ind
+      F[i][j] = max(s1, s2, s3)
+
+  alignA = ""
+  alignB = ""
+
+  i = len(seqB) - 1
+  j = len(seqA) - 1
+
+  while(i > 0 and j > 0):
+    score = F[i][j]
+    scoreDiag = F[i-1][j-1]
+    scoreUp = F[i-1][j]
+    scoreLeft = F[i][j-1]
+
+    if score == scoreDiag + _subs(seqA[j], seqB[i]):
+      alignA = seqA[j] + alignA
+      alignB = seqB[i] + alignB
+      i -= 1
+      j -= 1
+    elif score == scoreLeft + ind:
+      alignA = seqA[j] + alignA
+      alignB = "-" + alignB
+      j -= 1
+    elif score == scoreUp + ind:
+      alignA = "-" + alignA
+      alignB = seqB[i] + alignB
+      i -= 1
+
+  return (alignA, alignB)
 
 def identityProbability(gs: int, mr: float = 1e-08) -> float:
   """Return the probabilty for a sequence 

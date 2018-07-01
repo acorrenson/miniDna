@@ -38,3 +38,10 @@ seqb = "TTTGCATT"
 seqb, seqa = simpleAlign(seqb, seqa)
 
 compare(seqb, seqa)
+
+print("\n")
+
+compare("AGACTAGTTAC", "CGAGACGT---")
+
+a, b = localAlign("AGACTAGTTAC", "CGAGACGT")
+compare(a, b)
