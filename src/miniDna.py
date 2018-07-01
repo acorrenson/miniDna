@@ -108,7 +108,7 @@ def simpleAlign(seqA: str, seqB: str) -> tuple:
   """Find the best way to superimpose two sequences
     without changing them.
     Empty nucleotides used to match as best as possible
-    the sequences are symbolized with a "*" character.
+    the sequences are symbolized with a "-" character.
     
     Keyword arguments:
     seqA -- the first sequence
@@ -128,8 +128,8 @@ def simpleAlign(seqA: str, seqB: str) -> tuple:
       bestShift = shift
 
   
-  finalA = seqA + "".join("*" for j in range(bestShift))
-  finalB = "".join("*" for i in range(bestShift)) + seqB
+  finalA = seqA + "".join("-" for j in range(bestShift))
+  finalB = "".join("-" for i in range(bestShift)) + seqB
 
   return (finalA, finalB)
   
@@ -260,7 +260,7 @@ def compare(seqA: str, seqB: str) -> None:
       sim += '|'
       match += 1
     else:
-      sim += '-'
+      sim += ' '
       diff += 1
 
   print('======|=' + '=' * len(seqA))
