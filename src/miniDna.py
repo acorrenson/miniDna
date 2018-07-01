@@ -104,9 +104,9 @@ def countIdentical(seqA: str, seqB: str) -> int:
   return count
 
 
-def autoMatch(seqA: str, seqB: str) -> str:
-  """Find the best alignment between two sequences.
-    Return a new version of the second sequence.
+def simpleAlign(seqA: str, seqB: str) -> str:
+  """Find the best way to superimpose two sequences.
+    without changing them.
     Empty nucleotides used to match as best as possible
     the sequences are symbolized with a "*" character.
     
@@ -326,5 +326,5 @@ print('\n')
 seqa = "AATCATGC"
 seqb = "TTTGCATT"
 
-compare(seqb, autoMatch(seqb, seqa))
-compare(seqa, autoMatch(seqa, seqb))
+compare(seqb, simpleAlign(seqb, seqa))
+compare(seqa, simpleAlign(seqa, seqb))
