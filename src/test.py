@@ -41,7 +41,9 @@ compare(seqb, seqa)
 
 print("\n")
 
-compare("AGACTAGTTAC", "CGAGACGT---")
+# compare("AGACTAGTTAC", "CGAGACGT---")
 
-a, b = globalAlign("AGACTAGTTAC", "CGAGACGT")
-compare(a, b)
+a, b = globalAlign("MPRCLCQRINCYA", "PYRCKCRNICIA", 3, -1, -2)
+
+
+print("END")

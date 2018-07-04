@@ -149,16 +149,16 @@ def globalAlign(seqA: str, seqB: str, ide: int = 3, sub: int = -1, ind: int = -3
     sub -- substitution score
     ind -- indel score
   """
-  F = [[0 for x in range(len(seqA))] for y in range(len(seqB))]
+  F = [[0 for x in range(len(seqA) + 1)] for y in range(len(seqB) + 1)]
   
-  for i in range(len(seqA)):
+  for i in range(len(seqA) + 1):
     F[0][i] = ind * i
-  for i in range(len(seqB)):
+  for i in range(len(seqB) + 1):
     F[i][0] = ind * i
 
-  for i in range(1, len(seqB)):
-    for j in range(1, len(seqA)):
-      s1 = F[i-1][j-1] + _subs(seqA[j], seqB[i], ide, sub)
+  for i in range(1, len(seqB) + 1):
+    for j in range(1, len(seqA) + 1):
+      s1 = F[i-1][j-1] + _subs(seqA[j-1], seqB[i-1], ide, sub)
       s2 = F[i-1][j] + ind
       s3 = F[i][j-1] + ind
       F[i][j] = max(s1, s2, s3)
@@ -166,29 +166,39 @@ def globalAlign(seqA: str, seqB: str, ide: int = 3, sub: int = -1, ind: int = -3
   alignA = ""
   alignB = ""
 
-  i = len(seqB) - 1
-  j = len(seqA) - 1
+  i = len(seqB)
+  j = len(seqA)
 
   while(i > 0 and j > 0):
     score = F[i][j]
     scoreDiag = F[i-1][j-1]
     scoreUp = F[i-1][j]
     scoreLeft = F[i][j-1]
-
-    if score == scoreDiag + _subs(seqA[j], seqB[i]):
-      alignA = seqA[j] + alignA
-      alignB = seqB[i] + alignB
+    if score == scoreDiag + _subs(seqA[j-1], seqB[i-1], ide, sub):
+      alignA = seqA[j-1] + alignA
+      alignB = seqB[i-1] + alignB
       i -= 1
       j -= 1
     elif score == scoreLeft + ind:
-      alignA = seqA[j] + alignA
+      alignA = seqA[j-1] + alignA
       alignB = "-" + alignB
       j -= 1
     elif score == scoreUp + ind:
       alignA = "-" + alignA
-      alignB = seqB[i] + alignB
+      alignB = seqB[i-1] + alignB
       i -= 1
 
+  while(j > 0):
+    alignA = seqA[j-1] + alignA
+    alignB = "-" + alignB
+    j -= 1
+  while(i > 0):
+    alignA = "-" + alignA
+    alignB = seqB[i-1] + alignB
+    i -= 1
+
+  print(alignA)
+  print(alignB)
   return (alignA, alignB)
 
 def identityProbability(gs: int, mr: float = 1e-08) -> float:
