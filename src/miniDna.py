@@ -14,7 +14,9 @@
   (license file can be found in the parent directory)
 """
 
-import math, random
+import math
+import random
+import urllib.request
 
 # all nucleotides
 NUCLEOTIDES = 'ATGC'
@@ -360,5 +362,25 @@ def display(a: str, b: str, m: list) -> None:
     for j in range(len(m[0])):
       s += (m[i][j] + ' ')
     print(s)
+
+
+
+def getData(name: str, method: str = 'get') -> str:
+  """get a sequence in the KEGG database.
+
+    Keyword arguments:
+    name -- name of the sequence to get
+    method -- method of the KEGG API to use (default is 'get')
+
+    Example:
+    data = getData('hsa:3269') 
+  """
+
+  r = urllib.request.urlopen('http://rest.kegg.jp/{0}/{1}'.format(method, name))
+  txt = r.read().decode('utf-8')
+  return txt
+
+
+
 
 

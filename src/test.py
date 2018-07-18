@@ -47,3 +47,5 @@ a, b = globalAlign("MPRCLCQRINCYA", "PYRCKCRNICIA", 3, -1, -2)
 
 
 print("END")
+
+print(getData('hsa:3269'))
