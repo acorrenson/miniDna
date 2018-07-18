@@ -41,11 +41,12 @@ compare(seqb, seqa)
 
 print("\n")
 
-# compare("AGACTAGTTAC", "CGAGACGT---")
-
 a, b = globalAlign("MPRCLCQRINCYA", "PYRCKCRNICIA", 3, -1, -2)
 
+print("\n")
+
+print(translate(ntOfData(getData('hsa:3269'))))
+
+print("\n")
 
 print("END")
-
-print(getData('hsa:3269'))

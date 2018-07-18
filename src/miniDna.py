@@ -28,7 +28,7 @@ AMINOCODE =  {
   'AAA': 'K', 'GAG': 'E', 'AAT': 'N',
   'CTA': 'L', 'CAT': 'H', 'TCG': 'S',
   'TAG': 'STOP', 'GTG': 'V', 'TAT': 'Y',
-  'CCT': 'P', 'ACT': 'T', 'TCC': 's',
+  'CCT': 'P', 'ACT': 'T', 'TCC': 'S',
   'CAG': 'Q', 'CCA': 'P', 'TAA': 'STOP',
   'AGA': 'R', 'ACG': 'T', 'CAA': 'Q',
   'TGT': 'C', 'GCT': 'A', 'TTC': 'F',
@@ -379,6 +379,39 @@ def getData(name: str, method: str = 'get') -> str:
   r = urllib.request.urlopen('http://rest.kegg.jp/{0}/{1}'.format(method, name))
   txt = r.read().decode('utf-8')
   return txt
+
+
+def ntOfData(data: str):
+  """Extract the nucleotide sequence from data
+    fetched with getData function.
+  
+    Keyword arguments:
+    data -- a string returned by getData function
+  """
+
+  i = 0
+  while i < len(data):
+    s = data[i:i+5]
+    if s == "NTSEQ":
+      return ntParse(data[i+5:len(data)-1])
+    i += 1
+
+def ntParse(txt: str):
+  """Convert a string containing nucleotides
+    into a DNA sequence
+
+    Keyword arguments:
+    txt -- input string
+  """
+  txt = txt.upper()
+  nt = ""
+  for c in txt:
+    if c in NUCLEOTIDES:
+      nt += c
+  return nt
+
+
+
 
 
 
