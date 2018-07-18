@@ -49,4 +49,8 @@ print(translate(ntOfData(getData('hsa:3269'))))
 
 print("\n")
 
+print(aaOfData(getData('hsa:3269')))
+
+print("\n")
+
 print("END")
