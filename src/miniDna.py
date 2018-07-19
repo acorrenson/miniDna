@@ -70,6 +70,12 @@ AMINO = {
   'C': 'Cystein'
 }
 
+def deprec(func):
+  def newFunc(*args):
+    print("{0} -> deprecated ! you can use seqOfData instead".format(func))
+    exit()
+  return newFunc
+
 def isAdn(seq: str) -> bool: 
   """Test if a string is a DNA sequence.
 
@@ -397,6 +403,27 @@ def getData(name: str, method: str = 'get') -> str:
   return txt
 
 
+def seqOfData(data: str, seqType: str = "NTSEQ"):
+  i = 0
+  while i < len(data):
+    s = data[i:i+6]
+    if s ==  seqType + " ":
+      endLine = i
+      c = data[endLine]
+      while c != '\n':
+        endLine += 1
+        c = data[endLine]
+      size = _Len(data, i)
+      rows = math.ceil(size/60)
+      l = size + rows * 13
+      if seqType == "NTSEQ":
+        return ntClean(data[endLine:endLine+l])
+      else:
+        return aaClean(data[endLine:endLine+l])
+    i += 1
+
+
+@deprec
 def ntOfData(data: str):
   """Extract the nucleotide sequence from data
     fetched with getData function.
@@ -409,8 +436,18 @@ def ntOfData(data: str):
   while i < len(data):
     s = data[i:i+6]
     if s == "NTSEQ ":
-      return ntClean(data[i+5:i+_Len(data, i)])
+      endLine = i
+      c = data[endLine]
+      while c != '\n':
+        endLine += 1
+        c = data[endLine]
+      
+      size = _Len(data, i)
+      rows = math.ceil(size/60)
+      l = size + rows * 13
+      return ntClean(data[endLine:endLine+l])
     i += 1
+
 
 def ntClean(txt: str) -> str:
   """Convert a string containing nucleotides
@@ -419,7 +456,7 @@ def ntClean(txt: str) -> str:
     Keyword arguments:
     txt -- input string
   """
-  
+
   txt = txt.upper()
   nt = ""
   for c in txt:
@@ -428,6 +465,7 @@ def ntClean(txt: str) -> str:
   return nt.upper()
 
 
+@deprec
 def aaOfData(data: str) -> str:
   """Extract the amino acid sequence from data
     fetched with getData function.
@@ -440,7 +478,15 @@ def aaOfData(data: str) -> str:
   while i < len(data):
     s = data[i:i+6]
     if s == "AASEQ ":
-      return aaClean(data[i+5:i+_Len(data, i)])
+      endLine = i
+      c = data[endLine]
+      while c != '\n':
+        endLine += 1
+        c = data[endLine]
+      size = _Len(data, i)
+      rows = math.ceil(size/60)
+      l = size + rows * 13
+      return aaClean(data[endLine:endLine+l])
     i += 1
 
 
@@ -472,13 +518,10 @@ def aaClean(txt: str) -> str:
     Keyword arguments:
     txt -- input string
   """
-  
+
   txt = txt.upper()
   aa = ""
   for c in txt:
     if c in AMINO:
       aa += c
   return aa
-
-
-

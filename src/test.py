@@ -51,6 +51,9 @@ print("\n")
 
 print(aaOfData(getData('hsa:3269')))
 
+print(seqOfData(getData('hsa:3269'), "AASEQ"))
+
 print("\n")
+
 
 print("END")
