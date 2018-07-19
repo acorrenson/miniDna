@@ -14,7 +14,9 @@
   (license file can be found in the parent directory)
 """
 
-import math, random
+import math
+import random
+import urllib.request
 
 # all nucleotides
 NUCLEOTIDES = 'ATGC'
@@ -26,7 +28,7 @@ AMINOCODE =  {
   'AAA': 'K', 'GAG': 'E', 'AAT': 'N',
   'CTA': 'L', 'CAT': 'H', 'TCG': 'S',
   'TAG': 'STOP', 'GTG': 'V', 'TAT': 'Y',
-  'CCT': 'P', 'ACT': 'T', 'TCC': 's',
+  'CCT': 'P', 'ACT': 'T', 'TCC': 'S',
   'CAG': 'Q', 'CCA': 'P', 'TAA': 'STOP',
   'AGA': 'R', 'ACG': 'T', 'CAA': 'Q',
   'TGT': 'C', 'GCT': 'A', 'TTC': 'F',
@@ -61,8 +63,18 @@ AMINO = {
   'V': 'Valine',
   'D': 'Aspartic acid',
   'E': 'Glutamic acid',
-  'G': 'Glycine'
+  'G': 'Glycine',
+  'M': 'Methionine',
+  'W': 'Trytophane',
+  'Y': 'Tyrosine',
+  'C': 'Cystein'
 }
+
+def deprec(func):
+  def newFunc(*args):
+    print("{0} -> deprecated ! you can use seqOfData instead".format(func))
+    exit()
+  return newFunc
 
 def isAdn(seq: str) -> bool: 
   """Test if a string is a DNA sequence.
@@ -70,6 +82,7 @@ def isAdn(seq: str) -> bool:
     Keyword arguments:
     seq -- the string to test
   """
+
   nuc = ['A', 'T', 'G', 'C']
   for n in seq:
     if n not in nuc:
@@ -85,6 +98,7 @@ def percentIdentical(seqA: str, seqB: str) -> float:
     seqA -- the first sequence
     seqB -- the second sequence
   """
+
   if len(seqA) != len(seqB):
     raise ValueError("sequences have unequal length")
   dist = sum(ch1 != ch2 for ch1, ch2 in zip(seqA, seqB))
@@ -98,6 +112,7 @@ def countIdentical(seqA: str, seqB: str) -> int:
     seqA -- the first sequence
     seqB -- the second sequence
   """
+
   if len(seqA) != len(seqB):
     raise ValueError("sequences have unequal length")
   count = sum(ch1 == ch2 for ch1, ch2 in zip(seqA, seqB))
@@ -114,6 +129,7 @@ def simpleAlign(seqA: str, seqB: str) -> tuple:
     seqA -- the first sequence
     seqB -- the second sequence
   """
+
   bestShift = 0
   shift = 0
   countId = countIdentical(seqA, seqB)
@@ -149,6 +165,7 @@ def globalAlign(seqA: str, seqB: str, ide: int = 3, sub: int = -1, ind: int = -3
     sub -- substitution score
     ind -- indel score
   """
+
   F = [[0 for x in range(len(seqA) + 1)] for y in range(len(seqB) + 1)]
   
   for i in range(len(seqA) + 1):
@@ -209,6 +226,7 @@ def identityProbability(gs: int, mr: float = 1e-08) -> float:
     gs -- number of generations
     mr -- mutation rate (default is 1e-08)
   """
+
   return math.pow(1-mr, gs)
 
 
@@ -222,6 +240,7 @@ def freqList(seqList: list, prob: bool = True) -> dict:
             True: return a dictionnary of freqency (int)
             Default is True
   """
+
   n = len(seqList[0])
   nl = len(seqList)
   freqs = {
@@ -249,6 +268,7 @@ def freqAt(freqDict: dict, nuc: str, n: int) -> float:
     nuc -- nucleotide A,T,G or C
     n -- position
   """
+
   return freqDict[nuc][n]
 
 
@@ -258,6 +278,7 @@ def translate(seq: str) -> str:
     Keyword arguments:
     seq -- DNA sequence to translate
   """
+
   start = 0
   protein = ''
   while start+2 < len(seq):
@@ -274,6 +295,7 @@ def dotPlot(seqA: str, seqB: str) -> list:
     seqA -- first sequence
     seqB -- second sequence
   """
+
   la = len(seqA)
   lb = len(seqB)
   M = [[' ' for n in range(la)] for m in range(lb)]
@@ -293,6 +315,7 @@ def filterDotPlot(seqA: str, seqB: str, k: int) -> list:
     seqB -- second sequence
     k -- minimum length of equal portions
   """
+
   if isAdn(seqA) and isAdn(seqB):
     la = len(seqA)
     lb = len(seqB)
@@ -315,6 +338,7 @@ def compare(seqA: str, seqB: str) -> None:
     seqA -- first sequence (DNA or Protein)
     seqB -- first sequence (DNA or Protein)
   """
+
   la = len(seqA)
   lb = len(seqB)
   sim = ''
@@ -362,3 +386,155 @@ def display(a: str, b: str, m: list) -> None:
     print(s)
 
 
+
+def getData(name: str, method: str = 'get') -> str:
+  """get a sequence in the KEGG database.
+
+    Keyword arguments:
+    name -- name of the sequence to get
+    method -- method of the KEGG API to use (default is 'get')
+
+    Example:
+    data = getData('hsa:3269') 
+  """
+
+  r = urllib.request.urlopen('http://rest.kegg.jp/{0}/{1}'.format(method, name))
+  txt = r.read().decode('utf-8')
+  return txt
+
+
+def seqOfData(data: str, seqType: str = "NTSEQ"):
+  i = 0
+  while i < len(data):
+    s = data[i:i+6]
+    if s ==  seqType + " ":
+      endLine = i
+      c = data[endLine]
+      while c != '\n':
+        endLine += 1
+        c = data[endLine]
+      size = _Len(data, i)
+      rows = math.ceil(size/60)
+      l = size + rows * 13
+      if seqType == "NTSEQ":
+        return ntClean(data[endLine:endLine+l])
+      else:
+        return aaClean(data[endLine:endLine+l])
+    i += 1
+
+
+@deprec
+def ntOfData(data: str):
+  """Extract the nucleotide sequence from data
+    fetched with getData function.
+  
+    Keyword arguments:
+    data -- a string returned by getData function
+  """
+
+  i = 0
+  while i < len(data):
+    s = data[i:i+6]
+    if s == "NTSEQ ":
+      endLine = i
+      c = data[endLine]
+      while c != '\n':
+        endLine += 1
+        c = data[endLine]
+      
+      size = _Len(data, i)
+      rows = math.ceil(size/60)
+      l = size + rows * 13
+      return ntClean(data[endLine:endLine+l])
+    i += 1
+
+
+def ntClean(txt: str) -> str:
+  """Convert a string containing nucleotides
+    into a clean DNA sequence
+
+    Keyword arguments:
+    txt -- input string
+  """
+
+  txt = txt.upper()
+  nt = ""
+  for c in txt:
+    if c in NUCLEOTIDES:
+      nt += c
+  return nt.upper()
+
+
+@deprec
+def aaOfData(data: str) -> str:
+  """Extract the amino acid sequence from data
+    fetched with getData function.
+  
+    Keyword arguments:
+    data -- a string returned by getData function
+  """
+
+  i = 0
+  while i < len(data):
+    s = data[i:i+6]
+    if s == "AASEQ ":
+      endLine = i
+      c = data[endLine]
+      while c != '\n':
+        endLine += 1
+        c = data[endLine]
+      size = _Len(data, i)
+      rows = math.ceil(size/60)
+      l = size + rows * 13
+      return aaClean(data[endLine:endLine+l])
+    i += 1
+
+
+def _Len(data: str, i: int) -> int:
+  """Read the length of a sequence
+    in a string returned by getData function
+
+    Keyword arguments:
+    data -- a string returned by getData function
+    i -- index of the first char of the sequence
+        the sequence is read from char "N" for "NTSEQ"
+        the sequence is read from char "A" for "AASEQ"
+  """
+
+  sizeStr = ''
+  j = i + 12
+  c = data[j]
+  while c != '\n':
+    sizeStr += c
+    j += 1
+    c = data[j]
+  return int(sizeStr)
+
+
+def aaClean(txt: str) -> str:
+  """Convert a string containing amino acid
+    into a clean amino acid sequence
+
+    Keyword arguments:
+    txt -- input string
+  """
+
+  txt = txt.upper()
+  aa = ""
+  for c in txt:
+    if c in AMINO:
+      aa += c
+  return aa
+
+def stringToList(str: str) -> list:
+  l = []
+  s = ''
+  for c in str:
+    print(c)
+    if c == '\n':
+      l.append(s)
+      s = ''
+    else:
+      s += c
+  l.append(s)
+  return l
