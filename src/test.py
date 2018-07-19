@@ -45,15 +45,16 @@ a, b = globalAlign("MPRCLCQRINCYA", "PYRCKCRNICIA", 3, -1, -2)
 
 print("\n")
 
-print(translate(ntOfData(getData('hsa:3269'))))
+# print(translate(ntOfData(getData('hsa:3269'))))
 
 print("\n")
 
-print(aaOfData(getData('hsa:3269')))
+# print(aaOfData(getData('hsa:3269')))
 
 print(seqOfData(getData('hsa:3269'), "AASEQ"))
 
 print("\n")
 
+print(stringToList(getData('hsa:3269')))
 
 print("END")

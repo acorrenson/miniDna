@@ -525,3 +525,16 @@ def aaClean(txt: str) -> str:
     if c in AMINO:
       aa += c
   return aa
+
+def stringToList(str: str) -> list:
+  l = []
+  s = ''
+  for c in str:
+    print(c)
+    if c == '\n':
+      l.append(s)
+      s = ''
+    else:
+      s += c
+  l.append(s)
+  return l
