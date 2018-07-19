@@ -1,12 +1,12 @@
 
 all: doc index.html
-	firefox doc/index.html
+	firefox docs/index.html
 
 doc: reset
-	pdoc --html --html-no-source --html-dir doc src/miniDna.py
+	pdoc --html --html-no-source --html-dir docs src/miniDna.py
 
 index.html:
-	mv doc/miniDna.m.html doc/index.html
+	mv docs/miniDna.m.html docs/index.html
 
 reset:
-	rm -rf doc/*
+	rm -rf docs/*
