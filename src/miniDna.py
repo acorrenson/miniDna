@@ -46,6 +46,7 @@ AMINOCODE =  {
   'TTG': 'L', 'CCC': 'P', 'CTT': 'L', 
   'TGG': 'W'
 }
+"""Table to convert Codon to Amino Acid"""
 
 AMINO = {
   'A': 'Alanine', 
@@ -69,17 +70,13 @@ AMINO = {
   'Y': 'Tyrosine',
   'C': 'Cystein'
 }
+"""Table of all Amino Acid"""
 
-def deprec(func):
-  def newFunc(*args):
-    print("{0} -> deprecated ! you can use seqOfData instead".format(func))
-    exit()
-  return newFunc
 
 def isAdn(seq: str) -> bool: 
   """Test if a string is a DNA sequence.
 
-    Keyword arguments:
+    **Keyword arguments:**  
     seq -- the string to test
   """
 
@@ -94,7 +91,7 @@ def isAdn(seq: str) -> bool:
 def percentIdentical(seqA: str, seqB: str) -> float:
   """Return the percentage of identity between two DNA sequences.
     
-    Keyword arguments:
+    **Keyword arguments:**  
     seqA -- the first sequence
     seqB -- the second sequence
   """
@@ -108,8 +105,8 @@ def percentIdentical(seqA: str, seqB: str) -> float:
 def countIdentical(seqA: str, seqB: str) -> int:
   """Return the number of equal nucleotides between two sequences.
 
-    Keyword arguments:
-    seqA -- the first sequence
+    **Keyword arguments:**  
+    seqA -- the first sequence  
     seqB -- the second sequence
   """
 
@@ -125,8 +122,8 @@ def simpleAlign(seqA: str, seqB: str) -> tuple:
     Empty nucleotides used to match as best as possible
     the sequences are symbolized with a "-" character.
     
-    Keyword arguments:
-    seqA -- the first sequence
+    **Keyword arguments:**  
+    seqA -- the first sequence  
     seqB -- the second sequence
   """
 
@@ -158,12 +155,12 @@ def globalAlign(seqA: str, seqB: str, ide: int = 3, sub: int = -1, ind: int = -3
   """Find the best global alignement between two sequences.
     Return the two aligned sequences as a tuple.
 
-    Keyword arguments:
-    seqA -- first sequence
-    seqB -- second sequence
-    ide -- identity score 
-    sub -- substitution score
-    ind -- indel score
+    **Keyword arguments:**  
+    seqA -- first sequence  
+    seqB -- second sequence  
+    ide -- identity score  
+    sub -- substitution score  
+    ind -- indel score  
   """
 
   F = [[0 for x in range(len(seqA) + 1)] for y in range(len(seqB) + 1)]
@@ -222,9 +219,9 @@ def identityProbability(gs: int, mr: float = 1e-08) -> float:
   """Return the probabilty for a sequence 
     to not change over n generations of evolution.
     
-    Keyword arguments:
-    gs -- number of generations
-    mr -- mutation rate (default is 1e-08)
+    **Keyword arguments:**  
+    gs -- number of generations  
+    mr -- mutation rate (default is 1e-08)  
   """
 
   return math.pow(1-mr, gs)
@@ -234,8 +231,8 @@ def freqList(seqList: list, prob: bool = True) -> dict:
   """Return the frequency of each nucleotide in each
     position.
 
-    Keyword argument:
-    seqList -- DNA sequences list
+    **Keyword arguments:**  
+    seqList -- DNA sequences list  
     prob -- False: return a dictionnary of probability (between 0 and 1)
             True: return a dictionnary of freqency (int)
             Default is True
@@ -263,9 +260,9 @@ def freqAt(freqDict: dict, nuc: str, n: int) -> float:
   """Read a frequency dictionnary returned 
     by the function freqList.
 
-    Keyword arguments:
-    freqDic -- frequence dictionnary
-    nuc -- nucleotide A,T,G or C
+    **Keyword arguments:**  
+    freqDic -- frequence dictionnary  
+    nuc -- nucleotide A,T,G or C  
     n -- position
   """
 
@@ -275,8 +272,8 @@ def freqAt(freqDict: dict, nuc: str, n: int) -> float:
 def translate(seq: str) -> str:
   """find the protein coded in a DNA sequence
     
-    Keyword arguments:
-    seq -- DNA sequence to translate
+    **Keyword arguments:**  
+    seq -- DNA sequence to translate  
   """
 
   start = 0
@@ -291,9 +288,9 @@ def translate(seq: str) -> str:
 def dotPlot(seqA: str, seqB: str) -> list:
   """Compare two DNA sequences using DotPlot method.
 
-    Keyword arguments:
-    seqA -- first sequence
-    seqB -- second sequence
+    **Keyword arguments:**  
+    seqA -- first sequence  
+    seqB -- second sequence  
   """
 
   la = len(seqA)
@@ -310,10 +307,10 @@ def filterDotPlot(seqA: str, seqB: str, k: int) -> list:
   """Compare two DNA sequences using DotPlot method 
     keep only K long equals sequences
 
-    Keyword arguments:
-    seqA -- first sequence
-    seqB -- second sequence
-    k -- minimum length of equal portions
+    **Keyword arguments:**  
+    seqA -- first sequence  
+    seqB -- second sequence  
+    k -- minimum length of equal portions  
   """
 
   if isAdn(seqA) and isAdn(seqB):
@@ -331,11 +328,11 @@ def filterDotPlot(seqA: str, seqB: str, k: int) -> list:
 
 
 def compare(seqA: str, seqB: str) -> None:
-  """Compare two sequences.
+  """Compare two sequences.  
     Display the result in the console
 
-    Keyword arguments:
-    seqA -- first sequence (DNA or Protein)
+    **Keyword arguments:**  
+    seqA -- first sequence (DNA or Protein)  
     seqB -- first sequence (DNA or Protein)
   """
 
@@ -366,10 +363,10 @@ def compare(seqA: str, seqB: str) -> None:
 def display(a: str, b: str, m: list) -> None:
   """Display dotplot matrix properly
     
-    Keyword arguments:
-    a -- first sequence compared
-    b -- second sequence compared
-    m -- dotplot matrix
+    **Keyword arguments:**  
+    a -- first sequence compared  
+    b -- second sequence compared  
+    m -- dotplot matrix  
   """
   header = '  '
 
@@ -388,13 +385,13 @@ def display(a: str, b: str, m: list) -> None:
 
 
 def getData(name: str, method: str = 'get') -> str:
-  """get a sequence in the KEGG database.
+  """Get a sequence in the KEGG database.
 
-    Keyword arguments:
-    name -- name of the sequence to get
-    method -- method of the KEGG API to use (default is 'get')
+    **Keyword arguments:**  
+    name -- name of the sequence to get  
+    method -- method of the KEGG API to use (default is 'get')  
 
-    Example:
+    Example:  
     data = getData('hsa:3269') 
   """
 
@@ -404,6 +401,17 @@ def getData(name: str, method: str = 'get') -> str:
 
 
 def seqOfData(data: str, seqType: str = "NTSEQ"):
+  """Extract a nucleotide sequence or an amino
+    acid sequence from data fetched with
+    getData function.
+    
+    **Keyword arguments:**  
+    data -- a string returned by getData function
+    seqType -- type of sequence  
+      "NTSEQ" -> nucleotide sequence  
+      "AASEQ" -> amino acid sequence
+
+  """
   i = 0
   while i < len(data):
     s = data[i:i+6]
@@ -413,47 +421,21 @@ def seqOfData(data: str, seqType: str = "NTSEQ"):
       while c != '\n':
         endLine += 1
         c = data[endLine]
-      size = _Len(data, i)
+      size = _len(data, i)
       rows = math.ceil(size/60)
       l = size + rows * 13
       if seqType == "NTSEQ":
-        return ntClean(data[endLine:endLine+l])
+        return _ntClean(data[endLine:endLine+l])
       else:
-        return aaClean(data[endLine:endLine+l])
+        return _aaClean(data[endLine:endLine+l])
     i += 1
 
 
-@deprec
-def ntOfData(data: str):
-  """Extract the nucleotide sequence from data
-    fetched with getData function.
-  
-    Keyword arguments:
-    data -- a string returned by getData function
-  """
-
-  i = 0
-  while i < len(data):
-    s = data[i:i+6]
-    if s == "NTSEQ ":
-      endLine = i
-      c = data[endLine]
-      while c != '\n':
-        endLine += 1
-        c = data[endLine]
-      
-      size = _Len(data, i)
-      rows = math.ceil(size/60)
-      l = size + rows * 13
-      return ntClean(data[endLine:endLine+l])
-    i += 1
-
-
-def ntClean(txt: str) -> str:
+def _ntClean(txt: str) -> str:
   """Convert a string containing nucleotides
     into a clean DNA sequence
 
-    Keyword arguments:
+    **Keyword arguments:**  
     txt -- input string
   """
 
@@ -465,39 +447,14 @@ def ntClean(txt: str) -> str:
   return nt.upper()
 
 
-@deprec
-def aaOfData(data: str) -> str:
-  """Extract the amino acid sequence from data
-    fetched with getData function.
-  
-    Keyword arguments:
-    data -- a string returned by getData function
-  """
-
-  i = 0
-  while i < len(data):
-    s = data[i:i+6]
-    if s == "AASEQ ":
-      endLine = i
-      c = data[endLine]
-      while c != '\n':
-        endLine += 1
-        c = data[endLine]
-      size = _Len(data, i)
-      rows = math.ceil(size/60)
-      l = size + rows * 13
-      return aaClean(data[endLine:endLine+l])
-    i += 1
-
-
-def _Len(data: str, i: int) -> int:
+def _len(data: str, i: int) -> int:
   """Read the length of a sequence
     in a string returned by getData function
 
-    Keyword arguments:
-    data -- a string returned by getData function
-    i -- index of the first char of the sequence
-        the sequence is read from char "N" for "NTSEQ"
+    **Keyword arguments:**  
+    data -- a string returned by getData function  
+    i -- index of the first char of the sequence  
+        the sequence is read from char "N" for "NTSEQ"  
         the sequence is read from char "A" for "AASEQ"
   """
 
@@ -511,11 +468,11 @@ def _Len(data: str, i: int) -> int:
   return int(sizeStr)
 
 
-def aaClean(txt: str) -> str:
+def _aaClean(txt: str) -> str:
   """Convert a string containing amino acid
     into a clean amino acid sequence
 
-    Keyword arguments:
+    Keyword arguments:  
     txt -- input string
   """
 

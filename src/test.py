@@ -49,12 +49,14 @@ print("\n")
 
 print("\n")
 
-# print(aaOfData(getData('hsa:3269')))
+print(translate(seqOfData(getData('hsa:3269'))))
+
+print("\n")
 
 print(seqOfData(getData('hsa:3269'), "AASEQ"))
 
 print("\n")
 
-print(stringToList(getData('hsa:3269')))
+# print(stringToList(getData('hsa:3269')))
 
 print("END")
