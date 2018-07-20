@@ -5,7 +5,7 @@
   world of Bioinformatics. This module provides some
   basic functions to compare, translate and study DNA sequences
 
-  Author: Arthur Correnson
+  Author: Arthur Correnson  
   Email: arthur.correnson@gmail.com
 
   (c) 2018
@@ -43,21 +43,21 @@ AMINOCODE =  {
   'ATT': 'I', 'AGG': 'R', 'GAC': 'D',
   'ACC': 'T', 'AGC': 'S', 'TAC': 'Y',
   'ACA': 'T', 'AAG': 'K', 'GCA': 'A',
-  'TTG': 'L', 'CCC': 'P', 'CTT': 'L', 
+  'TTG': 'L', 'CCC': 'P', 'CTT': 'L',
   'TGG': 'W'
 }
 """Table to convert Codon to Amino Acid"""
 
 AMINO = {
-  'A': 'Alanine', 
-  'F': 'Phenyl-alanine', 
+  'A': 'Alanine',
+  'F': 'Phenyl-alanine',
   'L': 'Leucine',
   'P': 'Proline',
   'H': 'Histidine',
   'Q': 'Glutamine',
   'R': 'Arginine',
   'I': 'Isoleucine',
-  'T': 'Threonine', 
+  'T': 'Threonine',
   'N': 'Asparagine',
   'K': 'Lysine',
   'S': 'Serine',
@@ -73,7 +73,7 @@ AMINO = {
 """Table of all Amino Acid"""
 
 
-def isAdn(seq: str) -> bool: 
+def isDna(seq: str) -> bool: 
   """Test if a string is a DNA sequence.
 
     **Keyword arguments:**  
@@ -313,7 +313,7 @@ def filterDotPlot(seqA: str, seqB: str, k: int) -> list:
     k -- minimum length of equal portions  
   """
 
-  if isAdn(seqA) and isAdn(seqB):
+  if isDna(seqA) and isDna(seqB):
     la = len(seqA)
     lb = len(seqB)
     M = [[' ' for n in range(la)] for m in range(lb)]

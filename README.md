@@ -23,113 +23,33 @@ It provides some basic functions to compare, sort and study DNA sequences.
 
 Python : `v3.~`
 
-# References
+Python modules :
++ urllib
++ math
++ random
 
-All functions provided in the module are listed here :
+# Examples
+
+Here are two simple examples of what we can do with the miniDna module : 
 
 ```Python
 
-isDna(seq: str) -> bool
+# load data from KEGG database
+# (Here we are looking for a human gene
+# coding for histamine receptor)
+data = getData("hsa:3269")
 
-dotPlot(seqA: str, seqB: str) -> list
+# extract the nucleotide sequence
+seq = seqOfData(data, "NTSEQ")
 
-filterDotPlot(seqA: str, seqB: str, k: int) -> list
+# translate the nucleotide sequence into
+# an amino acid sequence
+aminoSeq = translate(seq)
 
-compare(seqA: str, seqB: str) -> null
-
-display(seqA: str, seqB: str, m: list) -> null
-
-# new !!!
-percentIdentical(seqA: str, seqB: str) -> int
-
-identityProbability(gs: int, mr: float)
-
-freqList(seqList: list, prob: bool = True) -> dict
-
-# --- more soon (wip) --- #
-
+# output : 
+# MSLPNSSCLLEDKMCEG...
 ```
 
 # Documentation
 
-### isDna(seq)
-
-Check if the given string is a Dna sequence (containing only nucleotides A T G C)
-
-Parameters :
-+ seq : `str` String to check
-
-Output :
-+ bool
-
-### dotPlot(seqA, seqB)
-
-Compare two sequences using DotPlot method.
-Return a matrix showing similarities between sequence A and B. 
-Similarities are marked with a X character in the matrix. 
-Differences are marked with a space character in the matrix. 
-
-Parameters :
-+ seqA : `str` first Dna sequence to compare
-+ seqB : `str` second Dna sequence to compare
-
-Output :
-+ `list` : matrice
-
-### filterDotPlot(seqA, seqB, k)
-
-Compare two squences using DotPlot method.
-Return a matrix of dots showing only similar portions
-of the sequences which are at least k nulceotides long.
-
-Parameters :
-+ seqA : `str` first Dna sequence
-+ seqB : `str` second Dna sequence
-+ k : `int` minimum length
-
-### compare(seqA, seqB)
-
-Verry simple comparison of 2 DNA sequences. 
-Equal nucleotides are marked with a vertical bar. 
-Different nucleotides are marked with a horinzontal bar. 
-
-Display the result in the console.
-
-Parameters :
-+ seqA : `str` first Dna sequence
-+ seqB : `str` second Dna sequence
-
-Output :
-+ `null`
-
-### display(seqA, seqB, m)
-
-Display a matrix generated with *dotPlot* or *filterDotPlot* functions in the console.
-
-+ seqA : `str` sequence (row)
-+ seqB : `str` sequence (column)
-+ m : `list` / `str` matrice
-
-Output :
-+ `null`
-
-### percentIdentical(seqA, seqB)
-
-Return the percentage of identity between two DNA sequences.
-The sequences should have the same length !
-
-+ seqA : `str` sequence
-+ seqB : `str` sequence
-
-Output : 
-+ `int` : percentage
-
-### identityProbability(gs [, mr])
-
-Return the probabilty for a sequence to not change over n generations of evolution.
-
-+ gs : `int` number of generations
-+ mr : `float` mutation rate (1E-8 by default)
-
-Output :
-+ `float` : probability
+The documentation can be read here : [*miniDna documentation*](https://jdrprod.github.io/miniDna)
