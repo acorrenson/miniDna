@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 import src.miniDna as md
 
 setup(
@@ -11,5 +11,6 @@ setup(
   author='Arthur Correnson',
   author_email='arthur.correnson@gmail.com',
   url='https://github.com/jdrprod/miniDna/',
-  packages=['src/miniDna'],
+  packages=find_packages('src'),
+  packages_dir={'':'src'},
   )
