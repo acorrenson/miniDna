@@ -13,4 +13,3 @@ rename:
 reset:
 	rm -rf docs/*
 
-

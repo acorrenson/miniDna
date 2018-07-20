@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import urllib.request
+import math
+from . sequence import *
+
 def getData(name: str, method: str = 'get') -> str:
   """Get a sequence in the KEGG database.
 

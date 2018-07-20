@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import math
+
 # all nucleotides
 NUCLEOTIDES = 'ATGC'
 
