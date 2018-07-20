@@ -12,5 +12,5 @@ setup(
   author_email='arthur.correnson@gmail.com',
   url='https://github.com/jdrprod/miniDna/',
   packages=find_packages('src'),
-  packages_dir={'':'src'},
+  package_dir={'':'src'},
   )
