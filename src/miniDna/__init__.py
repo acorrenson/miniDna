@@ -14,3 +14,4 @@
 """
 
 __all__ = ['database', 'sequence', 'simulation']
+__version__ = '1.3'
