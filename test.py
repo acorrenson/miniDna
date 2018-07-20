@@ -1,5 +1,7 @@
 
-from miniDna import *
+from src.miniDna.sequence import *
+from src.miniDna.simulation import *
+from src.miniDna.database import *
 
 # # test
 a = 'AGCTCCTAAGCCACTGCCTGCTGGTGACCCTGGCCGCCCACCTCCCCGCCGAGTTCACCC'
