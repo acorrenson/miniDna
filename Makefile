@@ -15,7 +15,7 @@ rename:
 	mv miniDna docs
 
 reset-doc:
-	rm -rf docs/*
+	rm -rf docs
 
 # upload and dist
 
