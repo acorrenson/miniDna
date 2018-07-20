@@ -10,6 +10,6 @@ setup(
   description='Python module to discover bioinformatic',
   author='Arthur Correnson',
   author_email='arthur.correnson@gmail.com',
-  url='https://jdrprod.github.io/miniDna',
+  url='https://github.com/jdrprod/miniDna/',
   packages=['src/miniDna'],
   )
