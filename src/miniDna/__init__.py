@@ -14,4 +14,4 @@
 """
 
 __all__ = ['database', 'sequence', 'simulation']
-__version__ = '1.3'
+__version__ = '1.3.1'
