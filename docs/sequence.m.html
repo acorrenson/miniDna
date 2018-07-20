@@ -3,11 +3,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 
-    <title>miniDna API documentation</title>
-    <meta name="description" content="MiniDna : an introduction to Bioinformatics
-
-MiniDna is a python project to discover the incredible
-..." />
+    <title>miniDna.sequence API documentation</title>
+    <meta name="description" content="" />
 
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
   
@@ -1043,16 +1040,36 @@ table {
   <div id="sidebar">
     <h1>Index</h1>
     <ul id="index">
+    <li class="set"><h3><a href="#header-variables">Module variables</a></h3>
+      
+  <ul>
+    <li class="mono"><a href="#miniDna.sequence.AMINO">AMINO</a></li>
+    <li class="mono"><a href="#miniDna.sequence.AMINOCODE">AMINOCODE</a></li>
+    <li class="mono"><a href="#miniDna.sequence.NUCLEOTIDES">NUCLEOTIDES</a></li>
+  </ul>
 
-
-
-    <li class="set"><h3><a href="#header-submodules">Sub-modules</a></h3>
-      <ul>
-        <li class="mono"><a href="database.m.html">miniDna.database</a></li>
-        <li class="mono"><a href="sequence.m.html">miniDna.sequence</a></li>
-        <li class="mono"><a href="simulation.m.html">miniDna.simulation</a></li>
-      </ul>
     </li>
+
+    <li class="set"><h3><a href="#header-functions">Functions</a></h3>
+      
+  <ul>
+    <li class="mono"><a href="#miniDna.sequence.compare">compare</a></li>
+    <li class="mono"><a href="#miniDna.sequence.countIdentical">countIdentical</a></li>
+    <li class="mono"><a href="#miniDna.sequence.display">display</a></li>
+    <li class="mono"><a href="#miniDna.sequence.dotPlot">dotPlot</a></li>
+    <li class="mono"><a href="#miniDna.sequence.filterDotPlot">filterDotPlot</a></li>
+    <li class="mono"><a href="#miniDna.sequence.freqAt">freqAt</a></li>
+    <li class="mono"><a href="#miniDna.sequence.freqList">freqList</a></li>
+    <li class="mono"><a href="#miniDna.sequence.globalAlign">globalAlign</a></li>
+    <li class="mono"><a href="#miniDna.sequence.isDna">isDna</a></li>
+    <li class="mono"><a href="#miniDna.sequence.percentIdentical">percentIdentical</a></li>
+    <li class="mono"><a href="#miniDna.sequence.simpleAlign">simpleAlign</a></li>
+    <li class="mono"><a href="#miniDna.sequence.translate">translate</a></li>
+  </ul>
+
+    </li>
+
+
     </ul>
   </div>
 
@@ -1064,43 +1081,274 @@ table {
 
 
   <header id="section-intro">
-  <h1 class="title"><span class="name">miniDna</span> module</h1>
-  <p>MiniDna : an introduction to Bioinformatics</p>
-<p>MiniDna is a python project to discover the incredible
-world of Bioinformatics. This module provides some
-basic functions to compare, translate and study DNA sequences</p>
-<p>Author: Arthur Correnson<br />
-Email: arthur.correnson@gmail.com</p>
-<p>(c) 2018</p>
-<p>MiniDna may be freely distributed under the MIT license.
-(license file can be found in the parent directory)</p>
+  <h1 class="title"><span class="name">miniDna.sequence</span> module</h1>
+  
   
 
   </header>
 
   <section id="section-items">
-
-
-
-    <h2 class="section-title" id="header-submodules">Sub-modules</h2>
+    <h2 class="section-title" id="header-variables">Module variables</h2>
       <div class="item">
-      <p class="name"><a href="database.m.html">miniDna.database</a></p>
+      <p id="miniDna.sequence.AMINO" class="name">var <span class="ident">AMINO</span></p>
       
   
+    <div class="desc"><p>Table of all Amino Acid</p></div>
+  <div class="source_cont">
+</div>
 
       </div>
       <div class="item">
-      <p class="name"><a href="sequence.m.html">miniDna.sequence</a></p>
+      <p id="miniDna.sequence.AMINOCODE" class="name">var <span class="ident">AMINOCODE</span></p>
       
   
+    <div class="desc"><p>Table to convert Codon to Amino Acid</p></div>
+  <div class="source_cont">
+</div>
 
       </div>
       <div class="item">
-      <p class="name"><a href="simulation.m.html">miniDna.simulation</a></p>
+      <p id="miniDna.sequence.NUCLEOTIDES" class="name">var <span class="ident">NUCLEOTIDES</span></p>
       
   
+  <div class="source_cont">
+</div>
 
       </div>
+
+    <h2 class="section-title" id="header-functions">Functions</h2>
+      
+  <div class="item">
+    <div class="name def" id="miniDna.sequence.compare">
+    <p>def <span class="ident">compare</span>(</p><p>seqA, seqB)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Compare two sequences.<br />
+Display the result in the console</p>
+<p><strong>Keyword arguments:</strong><br />
+seqA -- first sequence (DNA or Protein)<br />
+seqB -- first sequence (DNA or Protein)</p></div>
+  <div class="source_cont">
+</div>
+
+  </div>
+  
+      
+  <div class="item">
+    <div class="name def" id="miniDna.sequence.countIdentical">
+    <p>def <span class="ident">countIdentical</span>(</p><p>seqA, seqB)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Return the number of equal nucleotides between two sequences.</p>
+<p><strong>Keyword arguments:</strong><br />
+seqA -- the first sequence<br />
+seqB -- the second sequence</p></div>
+  <div class="source_cont">
+</div>
+
+  </div>
+  
+      
+  <div class="item">
+    <div class="name def" id="miniDna.sequence.display">
+    <p>def <span class="ident">display</span>(</p><p>a, b, m)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Display dotplot matrix properly</p>
+<p><strong>Keyword arguments:</strong><br />
+a -- first sequence compared<br />
+b -- second sequence compared<br />
+m -- dotplot matrix</p></div>
+  <div class="source_cont">
+</div>
+
+  </div>
+  
+      
+  <div class="item">
+    <div class="name def" id="miniDna.sequence.dotPlot">
+    <p>def <span class="ident">dotPlot</span>(</p><p>seqA, seqB)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Compare two DNA sequences using DotPlot method.</p>
+<p><strong>Keyword arguments:</strong><br />
+seqA -- first sequence<br />
+seqB -- second sequence</p></div>
+  <div class="source_cont">
+</div>
+
+  </div>
+  
+      
+  <div class="item">
+    <div class="name def" id="miniDna.sequence.filterDotPlot">
+    <p>def <span class="ident">filterDotPlot</span>(</p><p>seqA, seqB, k)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Compare two DNA sequences using DotPlot method 
+keep only K long equals sequences</p>
+<p><strong>Keyword arguments:</strong><br />
+seqA -- first sequence<br />
+seqB -- second sequence<br />
+k -- minimum length of equal portions</p></div>
+  <div class="source_cont">
+</div>
+
+  </div>
+  
+      
+  <div class="item">
+    <div class="name def" id="miniDna.sequence.freqAt">
+    <p>def <span class="ident">freqAt</span>(</p><p>freqDict, nuc, n)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Read a frequency dictionnary returned 
+by the function freqList.</p>
+<p><strong>Keyword arguments:</strong><br />
+freqDic -- frequence dictionnary<br />
+nuc -- nucleotide A,T,G or C<br />
+n -- position</p></div>
+  <div class="source_cont">
+</div>
+
+  </div>
+  
+      
+  <div class="item">
+    <div class="name def" id="miniDna.sequence.freqList">
+    <p>def <span class="ident">freqList</span>(</p><p>seqList, prob=True)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Return the frequency of each nucleotide in each
+position.</p>
+<p><strong>Keyword arguments:</strong><br />
+seqList -- DNA sequences list<br />
+prob -- False: return a dictionnary of probability (between 0 and 1)
+        True: return a dictionnary of freqency (int)
+        Default is True</p></div>
+  <div class="source_cont">
+</div>
+
+  </div>
+  
+      
+  <div class="item">
+    <div class="name def" id="miniDna.sequence.globalAlign">
+    <p>def <span class="ident">globalAlign</span>(</p><p>seqA, seqB, ide=3, sub=-1, ind=-3)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Find the best global alignement between two sequences.
+Return the two aligned sequences as a tuple.</p>
+<p><strong>Keyword arguments:</strong><br />
+seqA -- first sequence<br />
+seqB -- second sequence<br />
+ide -- identity score<br />
+sub -- substitution score<br />
+ind -- indel score</p></div>
+  <div class="source_cont">
+</div>
+
+  </div>
+  
+      
+  <div class="item">
+    <div class="name def" id="miniDna.sequence.isDna">
+    <p>def <span class="ident">isDna</span>(</p><p>seq)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Test if a string is a DNA sequence.</p>
+<p><strong>Keyword arguments:</strong><br />
+seq -- the string to test</p></div>
+  <div class="source_cont">
+</div>
+
+  </div>
+  
+      
+  <div class="item">
+    <div class="name def" id="miniDna.sequence.percentIdentical">
+    <p>def <span class="ident">percentIdentical</span>(</p><p>seqA, seqB)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Return the percentage of identity between two DNA sequences.</p>
+<p><strong>Keyword arguments:</strong><br />
+seqA -- the first sequence
+seqB -- the second sequence</p></div>
+  <div class="source_cont">
+</div>
+
+  </div>
+  
+      
+  <div class="item">
+    <div class="name def" id="miniDna.sequence.simpleAlign">
+    <p>def <span class="ident">simpleAlign</span>(</p><p>seqA, seqB)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Find the best way to superimpose two sequences
+without changing them.
+Empty nucleotides used to match as best as possible
+the sequences are symbolized with a "-" character.</p>
+<p><strong>Keyword arguments:</strong><br />
+seqA -- the first sequence<br />
+seqB -- the second sequence</p></div>
+  <div class="source_cont">
+</div>
+
+  </div>
+  
+      
+  <div class="item">
+    <div class="name def" id="miniDna.sequence.translate">
+    <p>def <span class="ident">translate</span>(</p><p>seq)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>find the protein coded in a DNA sequence</p>
+<p><strong>Keyword arguments:</strong><br />
+seq -- DNA sequence to translate</p></div>
+  <div class="source_cont">
+</div>
+
+  </div>
+  
+
+
   </section>
 
     </article>

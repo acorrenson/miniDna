@@ -3,11 +3,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 
-    <title>miniDna API documentation</title>
-    <meta name="description" content="MiniDna : an introduction to Bioinformatics
-
-MiniDna is a python project to discover the incredible
-..." />
+    <title>miniDna.database API documentation</title>
+    <meta name="description" content="" />
 
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
   
@@ -1044,15 +1041,17 @@ table {
     <h1>Index</h1>
     <ul id="index">
 
+    <li class="set"><h3><a href="#header-functions">Functions</a></h3>
+      
+  <ul>
+    <li class="mono"><a href="#miniDna.database.getData">getData</a></li>
+    <li class="mono"><a href="#miniDna.database.seqOfData">seqOfData</a></li>
+    <li class="mono"><a href="#miniDna.database.stringToList">stringToList</a></li>
+  </ul>
 
-
-    <li class="set"><h3><a href="#header-submodules">Sub-modules</a></h3>
-      <ul>
-        <li class="mono"><a href="database.m.html">miniDna.database</a></li>
-        <li class="mono"><a href="sequence.m.html">miniDna.sequence</a></li>
-        <li class="mono"><a href="simulation.m.html">miniDna.simulation</a></li>
-      </ul>
     </li>
+
+
     </ul>
   </div>
 
@@ -1064,43 +1063,73 @@ table {
 
 
   <header id="section-intro">
-  <h1 class="title"><span class="name">miniDna</span> module</h1>
-  <p>MiniDna : an introduction to Bioinformatics</p>
-<p>MiniDna is a python project to discover the incredible
-world of Bioinformatics. This module provides some
-basic functions to compare, translate and study DNA sequences</p>
-<p>Author: Arthur Correnson<br />
-Email: arthur.correnson@gmail.com</p>
-<p>(c) 2018</p>
-<p>MiniDna may be freely distributed under the MIT license.
-(license file can be found in the parent directory)</p>
+  <h1 class="title"><span class="name">miniDna.database</span> module</h1>
+  
   
 
   </header>
 
   <section id="section-items">
 
-
-
-    <h2 class="section-title" id="header-submodules">Sub-modules</h2>
-      <div class="item">
-      <p class="name"><a href="database.m.html">miniDna.database</a></p>
+    <h2 class="section-title" id="header-functions">Functions</h2>
       
+  <div class="item">
+    <div class="name def" id="miniDna.database.getData">
+    <p>def <span class="ident">getData</span>(</p><p>name, method=&#39;get&#39;)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Get a sequence in the KEGG database.</p>
+<p><strong>Keyword arguments:</strong><br />
+name -- name of the sequence to get<br />
+method -- method of the KEGG API to use (default is 'get')  </p>
+<p>Example:<br />
+data = getData('hsa:3269')</p></div>
+  <div class="source_cont">
+</div>
+
+  </div>
+  
+      
+  <div class="item">
+    <div class="name def" id="miniDna.database.seqOfData">
+    <p>def <span class="ident">seqOfData</span>(</p><p>data, seqType=&#39;NTSEQ&#39;)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Extract a nucleotide sequence or an amino
+acid sequence from data fetched with
+getData function.</p>
+<p><strong>Keyword arguments:</strong><br />
+data -- a string returned by getData function
+seqType -- type of sequence<br />
+  "NTSEQ" -&gt; nucleotide sequence<br />
+  "AASEQ" -&gt; amino acid sequence</p></div>
+  <div class="source_cont">
+</div>
+
+  </div>
+  
+      
+  <div class="item">
+    <div class="name def" id="miniDna.database.stringToList">
+    <p>def <span class="ident">stringToList</span>(</p><p>str)</p>
+    </div>
+    
+
+    
+  
+  <div class="source_cont">
+</div>
+
+  </div>
   
 
-      </div>
-      <div class="item">
-      <p class="name"><a href="sequence.m.html">miniDna.sequence</a></p>
-      
-  
 
-      </div>
-      <div class="item">
-      <p class="name"><a href="simulation.m.html">miniDna.simulation</a></p>
-      
-  
-
-      </div>
   </section>
 
     </article>

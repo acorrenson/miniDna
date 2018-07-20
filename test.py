@@ -1,5 +1,5 @@
 
-from miniDna import *
+from src.miniDna.miniDna import *
 
 # # test
 a = 'AGCTCCTAAGCCACTGCCTGCTGGTGACCCTGGCCGCCCACCTCCCCGCCGAGTTCACCC'

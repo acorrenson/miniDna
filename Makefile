@@ -1,12 +1,16 @@
 
-all: doc index.html
-	firefox docs/index.html
 
-doc: reset
-	pdoc --html --html-no-source --html-dir docs src/miniDna.py
+flags = --html --all-submodules --html-no-source --overwrite
 
-index.html:
-	mv docs/miniDna.m.html docs/index.html
+all: reset doc rename
+
+doc: 
+	pdoc ${flags} src/miniDna
+
+rename:
+	mv miniDna docs
 
 reset:
 	rm -rf docs/*
+
+
