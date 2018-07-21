@@ -27,5 +27,8 @@ reset-doc:
 publish: dist
 	twine upload --repository-url ${repo} dist/*
 
-dist:
+dist: reset-dist
 	python3 setup.py sdist bdist_wheel
+
+reset-dist:
+	rm -rf dist
