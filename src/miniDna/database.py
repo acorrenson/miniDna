@@ -19,9 +19,14 @@ def getData(name: str, method: str = 'get') -> str:
     **Keyword arguments:**  
     name -- entry to get  
     method -- method of the KEGG API to use (default is 'get')  
+    - 'get'  -> get data  
+    - 'info' -> information on an entry  
+    - 'list' -> list of all entries in a database  
+    
+    [KEGG API documentation](https://www.kegg.jp/kegg/rest/keggapi.html)
 
     Example:  
-    data = getData('hsa:3269') 
+    humanGenome = getData('hsa', 'list')
   """
 
   r = urllib.request.urlopen('http://rest.kegg.jp/{0}/{1}'.format(method, name))
@@ -62,10 +67,10 @@ def seqOfData(data: str, seqType: str = 'NTSEQ'):
     getData function.
     
     **Keyword arguments:**  
-    data -- a string returned by getData function
+    data -- a string returned by getData function  
     seqType -- type of sequence  
-      "NTSEQ" -> nucleotide sequence  
-      "AASEQ" -> amino acid sequence
+    - "NTSEQ" -> nucleotide sequence  
+    - "AASEQ" -> amino acid sequence
 
   """
 

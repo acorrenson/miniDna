@@ -16,5 +16,6 @@ print(aaseq)
 print(len(ntseq))
 print(ntseq)
 
-
 print(getNtSeq('hsa:3219'))
+
+print(getData('hsa', 'info'))
