@@ -4,12 +4,17 @@ flags = --html --all-submodules --html-no-source --overwrite
 
 repo = https://test.pypi.org/legacy/
 
-all: doc rename
+path = /home/arthur/Documents/Github/miniDna/src
+
+all: reset-doc doc rename
 
 # documentation
 
-doc: 
+doc: set-path
 	pdoc ${flags} src/miniDna
+
+set-path:
+	export PYTHONPATH=$$PYTHONPATH:${path}
 
 rename:
 	mv miniDna docs
