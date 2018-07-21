@@ -1,14 +1,23 @@
+"""Database submodule of miniDna
+
+  This submodule is a little wrapper for the KEGG api.
+  It allows users to browse KEGG databases and download
+  data from it.
+  
+  Kegg website :
+  https://www.kegg.jp/
+"""
+
 # -*- coding: utf-8 -*-
 
 import urllib.request
 import math
 
-
 def getData(name: str, method: str = 'get') -> str:
   """Get a sequence in the KEGG database.
 
     **Keyword arguments:**  
-    name -- name of the sequence to get  
+    name -- entry to get  
     method -- method of the KEGG API to use (default is 'get')  
 
     Example:  
@@ -18,6 +27,33 @@ def getData(name: str, method: str = 'get') -> str:
   r = urllib.request.urlopen('http://rest.kegg.jp/{0}/{1}'.format(method, name))
   txt = r.read().decode('utf-8')
   return txt
+
+
+def getNtSeq(name: str):
+  """Get a nucleotide sequence from the KEGG database
+
+    **Keyword arguments:**  
+    name -- entry to get
+  """
+  r = urllib.request.urlopen('http://rest.kegg.jp/get/{0}/ntseq'.format(name))
+  data = r.read().decode('utf-8')
+  lines = _stringToList(data)
+  seq = "".join(s for s in lines[1:len(lines)])
+  return seq
+
+
+def getAaSeq(name: str):
+  """Get a nucleotide sequence from the KEGG database
+
+    **Keyword arguments:**  
+    name -- entry to get
+  """
+
+  r = urllib.request.urlopen('http://rest.kegg.jp/get/{0}/aaseq'.format(name))
+  data = r.read().decode('utf-8')
+  lines = _stringToList(data)
+  seq = "".join(s for s in lines[1:len(lines)])
+  return seq
 
 
 def seqOfData(data: str, seqType: str = 'NTSEQ'):

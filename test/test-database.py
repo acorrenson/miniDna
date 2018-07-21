@@ -17,3 +17,4 @@ print(len(ntseq))
 print(ntseq)
 
 
+print(getNtSeq('hsa:3219'))
