@@ -3,7 +3,7 @@
 import math
 
 # all nucleotides
-NUCLEOTIDES = 'ATGC'
+NUCLEOTIDES = 'ATGCUatgcu'
 
 # codon to amino acid table
 AMINOCODE =  {
@@ -57,18 +57,25 @@ AMINO = {
 """Table of all Amino Acid"""
 
 
-def isDna(seq: str) -> bool: 
+def isDna(seq: str, msg: bool = False) -> bool: 
   """Test if a string is a DNA sequence.
 
     **Keyword arguments:**  
-    seq -- the string to test
+    seq -- the string to test  
+    msg -- display messages or not
   """
-
-  nuc = ['A', 'T', 'G', 'C']
+  isRna = False
   for n in seq:
-    if n not in nuc:
+    if n not in NUCLEOTIDES:
       print("Invalid DNA sequence")
       return False
+    elif n == 'U' or n == 'u':
+      isRna = True
+
+  if isRna and msg:
+    print(seq + "\nis a RNA sequence")
+  elif msg:
+    print(seq + "\nis a DNA sequence")
   return True
 
 

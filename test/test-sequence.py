@@ -2,13 +2,12 @@
 
 import sys
 
-sys.path.append('../')
+sys.path.append('../src')
 
-from src.miniDna.sequence import *
+from miniDna.sequence import *
 
 string = 'AGCTCCTAAGCCACTGCCTGCTGGTGACCCTGGCCGCCCACCTCCCCGCCGAGTTCACCC'
-print(string)
-print("Is it a dna sequence ?", isDna(string))
+isDna(string, True)
 
 print('\n')
 
