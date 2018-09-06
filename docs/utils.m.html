@@ -3,11 +3,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 
-    <title>miniDna.database API documentation</title>
-    <meta name="description" content="Database submodule of miniDna
-
-This submodule is a little wrapper for the KEGG api.
-It allows users ..." />
+    <title>miniDna.utils API documentation</title>
+    <meta name="description" content="" />
 
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
   
@@ -976,10 +973,7 @@ table {
     <li class="set"><h3><a href="#header-functions">Functions</a></h3>
       
   <ul>
-    <li class="mono"><a href="#miniDna.database.getAaSeq">getAaSeq</a></li>
-    <li class="mono"><a href="#miniDna.database.getData">getData</a></li>
-    <li class="mono"><a href="#miniDna.database.getNtSeq">getNtSeq</a></li>
-    <li class="mono"><a href="#miniDna.database.seqOfData">seqOfData</a></li>
+    <li class="mono"><a href="#miniDna.utils.deprec">deprec</a></li>
   </ul>
 
     </li>
@@ -996,13 +990,8 @@ table {
 
 
   <header id="section-intro">
-  <h1 class="title"><span class="name">miniDna.database</span> module</h1>
-  <p>Database submodule of miniDna</p>
-<p>This submodule is a little wrapper for the KEGG api.
-It allows users to browse KEGG databases and download
-data from it.</p>
-<p>Kegg website :
-https://www.kegg.jp/</p>
+  <h1 class="title"><span class="name">miniDna.utils</span> module</h1>
+  
   
 
   </header>
@@ -1012,79 +1001,13 @@ https://www.kegg.jp/</p>
     <h2 class="section-title" id="header-functions">Functions</h2>
       
   <div class="item">
-    <div class="name def" id="miniDna.database.getAaSeq">
-    <p>def <span class="ident">getAaSeq</span>(</p><p>name)</p>
+    <div class="name def" id="miniDna.utils.deprec">
+    <p>def <span class="ident">deprec</span>(</p><p>func)</p>
     </div>
     
 
     
   
-    <div class="desc"><p>Get a nucleotide sequence from the KEGG database</p>
-<p><strong>Keyword arguments:</strong><br />
-name -- entry to get</p></div>
-  <div class="source_cont">
-</div>
-
-  </div>
-  
-      
-  <div class="item">
-    <div class="name def" id="miniDna.database.getData">
-    <p>def <span class="ident">getData</span>(</p><p>name, method=&#39;get&#39;)</p>
-    </div>
-    
-
-    
-  
-    <div class="desc"><p>Get a sequence in the KEGG database.</p>
-<p><strong>Keyword arguments:</strong><br />
-name -- entry to get<br />
-method -- method of the KEGG API to use (default is 'get')<br />
-- 'get'  -&gt; get data<br />
-- 'info' -&gt; information on an entry<br />
-- 'list' -&gt; list of all entries in a database  </p>
-<p><a href="https://www.kegg.jp/kegg/rest/keggapi.html">KEGG API documentation</a></p>
-<p>Example:<br />
-humanGenome = getData('hsa', 'list')</p></div>
-  <div class="source_cont">
-</div>
-
-  </div>
-  
-      
-  <div class="item">
-    <div class="name def" id="miniDna.database.getNtSeq">
-    <p>def <span class="ident">getNtSeq</span>(</p><p>name)</p>
-    </div>
-    
-
-    
-  
-    <div class="desc"><p>Get a nucleotide sequence from the KEGG database</p>
-<p><strong>Keyword arguments:</strong><br />
-name -- entry to get</p></div>
-  <div class="source_cont">
-</div>
-
-  </div>
-  
-      
-  <div class="item">
-    <div class="name def" id="miniDna.database.seqOfData">
-    <p>def <span class="ident">seqOfData</span>(</p><p>data, seqType=&#39;NTSEQ&#39;)</p>
-    </div>
-    
-
-    
-  
-    <div class="desc"><p>Extract a nucleotide sequence or an amino
-acid sequence from data fetched with
-getData function.</p>
-<p><strong>Keyword arguments:</strong><br />
-data -- a string returned by getData function<br />
-seqType -- type of sequence<br />
-- "NTSEQ" -&gt; nucleotide sequence<br />
-- "AASEQ" -&gt; amino acid sequence</p></div>
   <div class="source_cont">
 </div>
 

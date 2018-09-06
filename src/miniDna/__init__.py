@@ -13,5 +13,5 @@
   (license file can be found in the parent directory)
 """
 
-__all__ = ['database', 'sequence', 'simulation']
+__all__ = ['database', 'sequence', 'simulation', 'utils']
 __version__ = '1.3.3'
