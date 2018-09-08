@@ -4,8 +4,6 @@ flags = --html --all-submodules --html-no-source --overwrite
 
 repo = https://test.pypi.org/legacy/
 
-path = /home/arthur/Documents/Github/miniDna/src
-
 all: reset-doc doc rename
 
 # documentation
@@ -14,8 +12,8 @@ doc: set-path
 	pdoc ${flags} src/miniDna
 
 set-path:
-	export PYTHONPATH=$$PYTHONPATH:${path}
-
+	echo "[Warning] pdoc needs your module to be added in PYTHONPATH to work"
+	
 rename:
 	mv miniDna docs
 
