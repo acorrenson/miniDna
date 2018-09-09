@@ -307,13 +307,14 @@ def filterDotPlot(seqA: str, seqB: str, k: int) -> list:
     return M
 
 
-def compare(seqA: str, seqB: str) -> None:
+def compare(seqA: str, seqB: str, verbose: bool = False) -> None:
   """Compare two sequences.  
     Display the result in the console
 
     **Keyword arguments:**  
     seqA -- first sequence (DNA or Protein)  
-    seqB -- first sequence (DNA or Protein)
+    seqB -- first sequence (DNA or Protein)   
+    verbose -- display or not sequences in the console
   """
 
   la = len(seqA)
@@ -330,11 +331,13 @@ def compare(seqA: str, seqB: str) -> None:
       sim += ' '
       diff += 1
 
-  print('======|=' + '=' * len(seqA))
-  print(' seqA | ' + seqA)
-  print(' ---- | ' + sim)
-  print(' seqB | ' + seqB)
-  print('======|=' + '=' * len(seqA))
+  if verbose:
+    print('======|=' + '=' * len(seqA))
+    print(' seqA | ' + seqA)
+    print(' ---- | ' + sim)
+    print(' seqB | ' + seqB)
+    print('======|=' + '=' * len(seqA))
+
   print('======|> ' + str(diff) + ' differences')
   print('======|> ' + str(match) + ' matches')
   print('======|> ' + str(percentIdentical(seqA, seqB)) + '% identity')

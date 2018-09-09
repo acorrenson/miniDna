@@ -11,8 +11,11 @@ verify:
 	
 # documentation
 
-doc:
+doc: install
 	pdoc ${flags} src/miniDna
+
+install:
+	sudo python3 setup.py install
 
 rename:
 	mv miniDna docs
