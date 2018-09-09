@@ -7,7 +7,7 @@ repo = https://test.pypi.org/legacy/
 all: reset-doc doc rename verify
 
 verify:
-	python3 verify.py
+	python3 -m verify.core
 	
 # documentation
 
