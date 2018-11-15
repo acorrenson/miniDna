@@ -7,7 +7,7 @@ An introduction to bioinformatics !
 MiniDna is a python project I coded in order to discover the incredible world of bioinformatics.
 It provides some basic functions to compare, sort and study DNA sequences.
 
-# Acknowledgments
+# References
 
 [*Alignements par pair*](http://pedagogix-tagc.univ-mrs.fr/courses/bioinfo_intro/pdf_files/03.02.alignements_par_paires_fr.pdf)
 + course written by : Jacques van Helden
