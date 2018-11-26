@@ -5,7 +5,7 @@ An introduction to bioinformatics !
 # Purposes
 
 MiniDna is a python project I coded in order to discover the incredible world of bioinformatics.
-It provides some basic functions to compare, sort and study DNA sequences.
+It provides some basic functions to compare DNA sequences.
 
 # References
 
