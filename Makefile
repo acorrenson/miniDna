@@ -12,6 +12,8 @@ all: doc
 
 doc: install
 	pdoc ${flags} ${path}
+	mv docs/miniDna/* docs
+	rmdir docs/miniDna
 
 install:
 	sudo python3 setup.py install
