@@ -318,7 +318,6 @@ def compare(seqA: str, seqB: str, verbose: bool = False) -> None:
   """
 
   la = len(seqA)
-  lb = len(seqB)
   sim = ''
   match = 0
   diff = 0
