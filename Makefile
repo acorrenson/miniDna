@@ -1,27 +1,23 @@
 
 
-flags = --html --all-submodules --html-no-source --overwrite
+flags = --html --output-dir docs
+
+path = src/miniDna
 
 repo = https://test.pypi.org/legacy/
 
-all: reset-doc doc rename verify
-
-verify:
-	python3 -m verify.core
+all: doc
 	
 # documentation
 
 doc: install
-	pdoc ${flags} src/miniDna
+	pdoc ${flags} ${path}
+	mv docs/miniDna/* docs
+	rmdir docs/miniDna
 
 install:
 	sudo python3 setup.py install
 
-rename:
-	mv miniDna docs
-
-reset-doc:
-	rm -rf docs
 
 # upload and dist
 
