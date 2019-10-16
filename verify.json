@@ -1,9 +1,0 @@
-{
-  "needed": [
-    "./docs/database.m.html",
-    "./docs/sequence.m.html",
-    "./docs/utils.m.html",
-    "./docs/simulation.m.html",
-    "./docs/index.html"
-  ]
-}
