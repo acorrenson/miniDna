@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import math
+
 def identityProbability(gs: int, mr: float = 1e-08) -> float:
   """Return the probabilty for a sequence 
     to not change over n generations of evolution.
